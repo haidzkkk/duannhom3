@@ -22,6 +22,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -46,20 +51,24 @@ import laptrinhandroid.fpoly.dnnhm3.Adapter.Adapter_baocao.TopSanPhamAdapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOBaoCao;
 import laptrinhandroid.fpoly.dnnhm3.Entity.BaoCao;
 import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;
+import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonNhapKho;
 import laptrinhandroid.fpoly.dnnhm3.R;
 
-public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenDataTime{
+public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenDataTime {
 
-    int i =0;
+    int i = 0;
+    int isNgay = 0;
     double doanhthu;
 
     CardView cvTime, cvDonHang, cvDonhuy;
-    TextView tvTime,tvDoanhThu, tvDonHang, tvDonHuy;
-    GraphView graphView;
+    TextView tvTime, tvDoanhThu, tvDonHang, tvDonHuy;
+    LineChart lineChart;
     RecyclerView recyclerView;
 
     TopSanPhamAdapter topSanPhamAdapter;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdfDate = new SimpleDateFormat("dd");
+    SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
     List<HoaDonBan> listHoaDonBan;
     List<BaoCao> listTopSp;
     Context mcontext;
@@ -80,21 +89,22 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
 
         getAllDataByDate(0, Calendar.getInstance().getTime());
 
-        cvTime.setOnClickListener(v->{
+        cvTime.setOnClickListener(v -> {
             showButtonSheetDialog();
         });
 
-        cvDonHang.setOnClickListener(v ->{
+        cvDonHang.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), BaoCaoDonhangActivity.class);
             Bundle bundle = new Bundle();
-            if (listHoaDonBan.size() > 0)  bundle.putSerializable("data", (Serializable) listHoaDonBan);
-            else  bundle.putSerializable("data", null);
+            if (listHoaDonBan.size() > 0)
+                bundle.putSerializable("data", (Serializable) listHoaDonBan);
+            else bundle.putSerializable("data", null);
             bundle.putBoolean("is", true);
             intent.putExtras(bundle);
             startActivity(intent);
         });
 
-        cvDonhuy.setOnClickListener(v ->{
+        cvDonhuy.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), BaoCaoDonhangActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("data", null);
@@ -106,7 +116,7 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         return view;
     }
 
-    private void anhxa(View view){
+    private void anhxa(View view) {
         tvTime = view.findViewById(R.id.frg_cuahang_tv_time);
         cvTime = view.findViewById(R.id.frg_cuahang_cardview_time);
         cvDonHang = view.findViewById(R.id.cuahang_cv_donhang);
@@ -114,7 +124,7 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         tvDoanhThu = view.findViewById(R.id.cuahang_tv_doanhthu);
         tvDonHang = view.findViewById(R.id.cuahang_tv_soluongdonhang);
         tvDonHuy = view.findViewById(R.id.cuahang_tv_soluongdonhuy);
-        graphView = view.findViewById(R.id.cuahang_graphview);
+        lineChart = view.findViewById(R.id.cuahang_graphview);
         recyclerView = view.findViewById(R.id.cuahang_rcv_top);
 
         listHoaDonBan = new ArrayList<>();
@@ -159,22 +169,27 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         switch (choice) {
             case 0:
                 tvTime.setText("Hôm nay");
+                isNgay = 0;
                 getAllDataByDate(0, Calendar.getInstance().getTime());
                 break;
             case 1:
                 tvTime.setText("Tuần này");
+                isNgay = 1;
                 getAllDataByDate(1, Calendar.getInstance().getTime());
                 break;
             case 2:
                 tvTime.setText("Tháng này");
+                isNgay = 2;
                 getAllDataByDate(2, Calendar.getInstance().getTime());
                 break;
             case 3:
                 tvTime.setText("Tuần trước");
+                isNgay = 3;
                 getAllDataByDate(3, Calendar.getInstance().getTime());
                 break;
             case 4:
                 tvTime.setText("Tháng trước");
+                isNgay = 4;
                 getAllDataByDate(4, Calendar.getInstance().getTime());
                 break;
             case 5:
@@ -182,9 +197,10 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(year, month,dayOfMonth);
+                        calendar.set(year, month, dayOfMonth);
                         tvTime.setText(simpleDateFormat.format(calendar.getTime()));
                         getAllDataByDate(5, calendar.getTime());
+                        isNgay = 5;
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
@@ -197,17 +213,17 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getAllDataByDate(int positon , Date date){
+    private void getAllDataByDate(int positon, Date date) {
         try {
             listHoaDonBan.clear();
             listTopSp.clear();
-            listHoaDonBan.addAll(daoBaoCao.getListHoaDonBanByDay(positon ,date));
-            listTopSp.addAll(daoBaoCao.getListTopSanPham(positon ,date));
+            listHoaDonBan.addAll(daoBaoCao.getListHoaDonBanByDay(positon, date));
+            listTopSp.addAll(daoBaoCao.getListTopSanPham(positon, date));
             setUpData();
             setUpChart();
             setUpTopSP();
-            Log.i("lengthListlailo",  "Length " + listHoaDonBan.size() );
-            Log.i("lengthListlailo",  "Length TOP SP " + listTopSp.toString() );
+            Log.i("lengthListlailo", "Length " + listHoaDonBan.size());
+            Log.i("lengthListlailo", "Length TOP SP " + listTopSp.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -219,25 +235,25 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         doanhthu = getDoanhThu();
     }
 
-    private Double getDoanhThu(){
+    private Double getDoanhThu() {
         double tong = 0;
-        for (HoaDonBan hd: listHoaDonBan){
+        for (HoaDonBan hd : listHoaDonBan) {
             tong += hd.getTongTien();
         }
         runTien(tong);
         return tong;
     }
 
-    private void runTien(double tong){
+    private void runTien(double tong) {
         i = 0;
         Handler handler1 = new Handler();
         handler1.post(new Runnable() {
             @Override
             public void run() {
-                if (i <= tong){
+                if (i <= tong) {
                     i = i + 5234;
-                    tvDoanhThu.setText(forMatNumber((double) i)+ " ₫");
-                }else {
+                    tvDoanhThu.setText(forMatNumber((double) i) + " ₫");
+                } else {
                     tvDoanhThu.setText(forMatNumber(tong) + " ₫");
                     return;
                 }
@@ -247,10 +263,10 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         tvDoanhThu.setText(forMatNumber(tong) + " ₫");
     }
 
-    private int getSumDonHang(){
+    private int getSumDonHang() {
         int sum = 0;
-        for (HoaDonBan hd: listHoaDonBan){
-            if (hd.getTongTien() > 0){
+        for (HoaDonBan hd : listHoaDonBan) {
+            if (hd.getTongTien() > 0) {
                 ++sum;
             }
         }
@@ -258,10 +274,10 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         return sum;
     }
 
-    private int getSumDonHuy(){
+    private int getSumDonHuy() {
         int sum = 0;
-        for (HoaDonBan hd: listHoaDonBan){
-            if (hd.getTongTien() == 0){
+        for (HoaDonBan hd : listHoaDonBan) {
+            if (hd.getTongTien() == 0) {
                 ++sum;
             }
         }
@@ -269,8 +285,8 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         return sum;
     }
 
-    private String forMatNumber(Double aDouble){
-        DecimalFormat formatter  = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+    private String forMatNumber(Double aDouble) {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
 
         symbols.setGroupingSeparator(',');
@@ -279,7 +295,7 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
         return formatter.format(aDouble);
     }
 
-    private void setUpTopSP(){
+    private void setUpTopSP() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         topSanPhamAdapter = new TopSanPhamAdapter(getContext(), listTopSp, 0);
@@ -288,31 +304,48 @@ public class FragmentCuaHang extends Fragment implements BaocaoAdapterLich.IsenD
 
     }
 
-    private void setUpChart(){
+    private void setUpChart() {
 
-        line1 = new LineGraphSeries<>(getValuesChart());
+        lineChart.clear();
 
-        graphView.addSeries(line1);
-        line1.setColor(getResources().getColor(R.color.teal_200));
-        graphView.getViewport().setXAxisBoundsManual(true);     // cho biểu đồ rộng bằng item
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(false);
+
+        LineDataSet set1 = new LineDataSet(getValuesChart(true), "Data set 1");
+
+        set1.setFillAlpha(110);
+        set1.setColor(getResources().getColor(R.color.teal_200));
+        set1.setLineWidth(3f);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData lineData = new LineData(dataSets);
+
+        lineChart.setData(lineData);
 
     }
 
-    private DataPoint[] getValuesChart (){
-        DataPoint[] dataPoint = new DataPoint[]{
-                new DataPoint(0, 21),
-                new DataPoint(1, 12),
-                new DataPoint(2, 34),
-                new DataPoint(3, 56),
-                new DataPoint(4, 23),
-                new DataPoint(5, 63),
-                new DataPoint(6, 23),
-                new DataPoint(7, 74),
-                new DataPoint(8, 12),
-                new DataPoint(9, 75),
-                new DataPoint(10, 45),
-                new DataPoint(11, 23),
-        };
-        return dataPoint;
+    private ArrayList<Entry> getValuesChart(boolean isThu) {
+        ArrayList<Entry> values = new ArrayList<>();
+
+        int tongNgay = 0;
+        if (isNgay == 0 || isNgay == 5) tongNgay = 1;
+        else if (isNgay == 1 || isNgay == 3) tongNgay = 7;
+        else tongNgay = 30;
+
+        for (int i = 1; i < tongNgay; i++) {
+            int sodon = 0;
+            for (HoaDonBan hb : listHoaDonBan) {
+                if (i == Integer.parseInt(sdfDate.format(hb.getNgayBan()))) {
+                    sodon++;
+                }
+            }
+            values.add(new Entry(i, Float.valueOf(sodon)));
+        }
+
+
+        return values;
     }
+
 }

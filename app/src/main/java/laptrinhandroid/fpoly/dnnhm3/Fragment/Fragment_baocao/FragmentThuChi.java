@@ -8,10 +8,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
@@ -22,6 +24,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.tabs.TabLayout;
@@ -47,20 +61,22 @@ import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;
 import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonNhapKho;
 import laptrinhandroid.fpoly.dnnhm3.R;
 
-public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDataTime{
+public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDataTime {
 
     int isNgay = 0;
     boolean isSelectThu = true;
 
     private TabLayout tabLayout;
     private CardView cvTime;
-    private TextView tvTime, tvtitleChart ,tvtitleTbThu, tvTbThu;
-    GraphView graphView;
+    private TextView tvTime, tvtitleChart, tvtitleTbThu, tvTbThu;
+    //    GraphView graphView;
+    LineChart lineChart;
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd");
+    SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
     BottomSheetDialog sheetDialogLich;
-    private LineGraphSeries<DataPoint> line1;
+    //    private LineGraphSeries<DataPoint> line1;
     List<HoaDonBan> listHoaDonBan;
     List<HoaDonNhapKho> listHoaDonNhapKho;
 
@@ -84,7 +100,8 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         tvTbThu = view.findViewById(R.id.frg_thuchi_tv_tbthutheongay);
         tabLayout = view.findViewById(R.id.baoCao_tablayout);
         cvTime = view.findViewById(R.id.frg_thuchi_cardview_time);
-        graphView = view.findViewById(R.id.graph_view);
+//        graphView = view.findViewById(R.id.graph_view);
+        lineChart = view.findViewById(R.id.frg_thuchi_chart);
 
         daoBaoCao = new DAOBaoCao();
         mcontext = getActivity();
@@ -104,21 +121,20 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         });
 
 
-
         return view;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getAllDataByDate(int positon , Date date){
+    private void getAllDataByDate(int positon, Date date) {
         try {
             listHoaDonBan.clear();
             listHoaDonNhapKho.clear();
-            listHoaDonBan.addAll(daoBaoCao.getListHoaDonBanByDay(positon ,date));
-            listHoaDonNhapKho.addAll(daoBaoCao.getListHoaDonNhapByDay(positon ,date));
+            listHoaDonBan.addAll(daoBaoCao.getListHoaDonBanByDay(positon, date));
+            listHoaDonNhapKho.addAll(daoBaoCao.getListHoaDonNhapByDay(positon, date));
             setUpTablayout();
-            Log.i("lengthListThuChi",  "Length " + listHoaDonBan.size() );
-            Log.i("lengthListThuChi",  "Length " + listHoaDonNhapKho.size() );
-            Log.e("Kiemtra1", positon + " " );
+            Log.i("lengthListThuChi", "Length " + listHoaDonBan.size());
+            Log.i("lengthListThuChi", "Length " + listHoaDonNhapKho.size());
+            Log.e("Kiemtra1", positon + " ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -259,7 +275,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mcontext, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(year, month,dayOfMonth);
+                        calendar.set(year, month, dayOfMonth);
                         tvTime.setText(simpleDateFormat.format(calendar.getTime()));
                         getAllDataByDate(5, calendar.getTime());
                         isNgay = 5;
@@ -274,54 +290,142 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         sheetDialogLich.dismiss();
     }
 
-    private void setUpChart(boolean isThu){
+    private void setUpChart(boolean isThu) {
 
-        line1 = new LineGraphSeries<>(getValuesChart());
+        lineChart.clear();
 
-        graphView.addSeries(line1);
-        if (isThu)line1.setColor(getResources().getColor(R.color.teal_200));
-        else line1.setColor(getResources().getColor(R.color.red));
-        line1.setDrawBackground(true);
-        graphView.getViewport().setXAxisBoundsManual(true);     // cho biểu đồ rộng bằng item
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(false);
+
+        LineDataSet set1 = new LineDataSet(getValuesChart(true), "Data set 1");
+        LineDataSet set2 = new LineDataSet(getValuesChart(false), "Data set 2");
+
+        set1.setFillAlpha(110);
+        set1.setColor(getResources().getColor(R.color.teal_200));
+        set1.setLineWidth(3f);
+
+        set2.setFillAlpha(110);
+        set2.setColor(Color.RED);
+        set2.setLineWidth(3f);
+
+        if (isThu){
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+
+            LineData lineData = new LineData(dataSets);
+
+            lineChart.setData(lineData);
+        }else {
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set2);
+
+            LineData lineData = new LineData(dataSets);
+
+            lineChart.setData(lineData);
+        }
+
+
+        XAxis xAxis = lineChart.getXAxis();
+        List<String> mlist = getValueDay();
+        xAxis.setValueFormatter(new MyXValueFormat((ArrayList<String>) mlist));
+//        xAxis.setGranularity(1f);
 
     }
 
-    private void setUpData(boolean isThu){
+    public class MyXValueFormat extends ValueFormatter implements IAxisValueFormatter{
+        private ArrayList<String> list;
+        public MyXValueFormat(ArrayList<String> list){
+            this.list = list;
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            String ngay = list.get((int) value);
+            return ngay;
+        }
+    }
+
+    private ArrayList<Entry> getValuesChart(boolean isThu) {
+        ArrayList<Entry> values = new ArrayList<>();
 
         int tongNgay = 0;
-        if (isNgay == 0 || isNgay == 5)tongNgay = 1;
+        if (isNgay == 0 || isNgay == 5) tongNgay = 1;
         else if (isNgay == 1 || isNgay == 3) tongNgay = 7;
         else tongNgay = 30;
 
-        if (isThu)tvTbThu.setText(String.valueOf(forMatNumber(getTongThu()/tongNgay) + " ₫"));
-        else tvTbThu.setText(String.valueOf(forMatNumber(getTongChi()/tongNgay) + " ₫"));
 
         if (isThu){
+            for (int i = 1 ; i < tongNgay; i++){
+                for (HoaDonBan hb : listHoaDonBan){
+                    if (i == Integer.parseInt(sdfDate.format(hb.getNgayBan()))){
+                        values.add(new Entry(i, Float.valueOf(hb.getTongTien())));
+                    }else {
+                        values.add(new Entry(i, Float.valueOf(i)));
+                    }
+                }
+            }
+        }else {
+            for (int i = 1 ; i < tongNgay; i++){
+                for (HoaDonNhapKho hb : listHoaDonNhapKho){
+                    if (i == Integer.parseInt(sdfDate.format(hb.getNgayNhap()))){
+                        values.add(new Entry(i, Float.valueOf(hb.getTongTien())));
+                    }else {
+                        values.add(new Entry(i, Float.valueOf(i)));
+                    }
+                }
+            }
+        }
+
+        return values;
+    }
+
+    private ArrayList<String> getValueDay(){
+        ArrayList<String> mlist = new ArrayList<>();
+
+        int tongNgay = 0;
+        if (isNgay == 0 || isNgay == 5) tongNgay = 1;
+        else if (isNgay == 1 || isNgay == 3) tongNgay = 7;
+        else tongNgay = 30;
+
+        for (int i = 1 ; i <= tongNgay; i++){
+            for (HoaDonBan hb : listHoaDonBan){
+                if (i == Integer.parseInt(sdfDate.format(hb.getNgayBan()))){
+                    mlist.add(String.valueOf(sdfDate.format(hb.getNgayBan()))+ "/" + String.valueOf(sdfMonth.format(hb.getNgayBan())) );
+                }
+            }
+
+            //check kh có data thi thang nay
+            if (listHoaDonBan.size() > 0){
+                mlist.add( i + "/"  +  String.valueOf(sdfMonth.format(listHoaDonBan.get(0).getNgayBan())));
+            }else {
+                mlist.add( i + "/"  +  String.valueOf(sdfMonth.format(Calendar.getInstance().getTime())));
+            }
+
+        }
+        Log.e("formatngay", mlist.toString());
+        return mlist;
+    }
+
+
+    private void setUpData(boolean isThu) {
+
+        int tongNgay = 0;
+        if (isNgay == 0 || isNgay == 5) tongNgay = 1;
+        else if (isNgay == 1 || isNgay == 3) tongNgay = 7;
+        else tongNgay = 30;
+
+        if (isThu) tvTbThu.setText(String.valueOf(forMatNumber(getTongThu() / tongNgay) + " ₫"));
+        else tvTbThu.setText(String.valueOf(forMatNumber(getTongChi() / tongNgay) + " ₫"));
+
+        if (isThu) {
             tvtitleChart.setText("Biểu đồ tổng thu");
             tvtitleTbThu.setText("Trung bình thu");
-        }else {
+        } else {
             tvtitleChart.setText("Biểu đồ tổng chi");
             tvtitleTbThu.setText("Trung bình chi");
         }
     }
 
-    private DataPoint[] getValuesChart (){
-        DataPoint[] dataPoint = new DataPoint[]{
-                new DataPoint(0, 21),
-                new DataPoint(1, 12),
-                new DataPoint(2, 34),
-                new DataPoint(3, 56),
-                new DataPoint(4, 23),
-                new DataPoint(5, 63),
-                new DataPoint(6, 23),
-                new DataPoint(7, 74),
-                new DataPoint(8, 12),
-                new DataPoint(9, 75),
-                new DataPoint(10, 45),
-                new DataPoint(11, 23),
-        };
-        return dataPoint;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -329,24 +433,24 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         setChoise(time);
     }
 
-    private double getTongThu(){
+    private double getTongThu() {
         double tongthu = 0;
-        for (HoaDonBan bc: listHoaDonBan){
+        for (HoaDonBan bc : listHoaDonBan) {
             tongthu += bc.getTongTien();
         }
         return tongthu;
     }
 
-    private double getTongChi(){
+    private double getTongChi() {
         double tongchi = 0;
-        for (HoaDonNhapKho bc: listHoaDonNhapKho){
+        for (HoaDonNhapKho bc : listHoaDonNhapKho) {
             tongchi += bc.getTongTien();
         }
         return tongchi;
     }
 
-    private String forMatNumber(Double aDouble){
-        DecimalFormat formatter  = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+    private String forMatNumber(Double aDouble) {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
 
         symbols.setGroupingSeparator(',');
