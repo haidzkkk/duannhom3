@@ -43,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -61,7 +62,7 @@ import laptrinhandroid.fpoly.dnnhm3.R;
 import laptrinhandroid.fpoly.dnnhm3.setImg;
 
 public class AddNhanVien extends AppCompatActivity implements setImg {
-    private ImageView avatar, imgCCCD, imgTATS;
+    private PhotoView avatar, imgCCCD, imgTATS;
     private TextView txtSelectImg, txtSelectCCCD, txtSelectTATS;
     private Toolbar toolbar;
     TextInputLayout hoTen, diaChi, soDT, email, gioiTinh, ngaySinh, ngayBD, matKhau;
