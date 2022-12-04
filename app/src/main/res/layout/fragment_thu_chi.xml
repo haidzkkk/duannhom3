@@ -155,14 +155,20 @@
 
                             </LinearLayout>
 
-                            <com.jjoe64.graphview.GraphView
-                                android:id="@+id/graph_view"
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/frg_thuchi_chart"
                                 android:layout_width="match_parent"
                                 android:layout_height="200dp"
-                                android:background="@color/white" />
+                                android:background="@color/white"/>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
+<!--                    <com.jjoe64.graphview.GraphView-->
+<!--                        android:id="@+id/graph_view"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:background="@color/white" />-->
 
 <!--                    <androidx.cardview.widget.CardView-->
 <!--                        android:layout_width="match_parent"-->

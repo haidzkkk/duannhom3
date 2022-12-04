@@ -220,7 +220,7 @@
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="10dp">
 
-                <com.jjoe64.graphview.GraphView
+                <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/cuahang_graphview"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
