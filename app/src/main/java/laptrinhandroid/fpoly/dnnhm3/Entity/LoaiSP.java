@@ -7,6 +7,11 @@ public class LoaiSP {
     public LoaiSP() {
     }
 
+    public LoaiSP(int maLoai, String tenLoai) {
+        this.maLoai = maLoai;
+        this.tenLoai = tenLoai;
+    }
+
     public int getMaLoai() {
         return maLoai;
     }
