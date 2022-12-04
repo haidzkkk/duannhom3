@@ -200,14 +200,14 @@ public class DAOBaoCao {
 
     // lấy ngày đầu tiên của tuần thứ bao nhiêu trong năm
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private String getFirstDayThisWeek(LocalDate localDate, Calendar calendar ){
+    public String getFirstDayThisWeek(LocalDate localDate, Calendar calendar ){
         return localDate.with(WeekFields.of(Locale.US).getFirstDayOfWeek())
                 .with(WeekFields.of(Locale.US).weekOfWeekBasedYear(), calendar.get(Calendar.WEEK_OF_YEAR)).toString();
     }
 
     // lấy ngày đầu tiên của tháng trong localDate
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private String getFirstDayThisMonth(LocalDate localDate){
+    public String getFirstDayThisMonth(LocalDate localDate){
         return localDate.withDayOfMonth(1).toString();
     }
 }

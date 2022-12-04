@@ -31,11 +31,13 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.tabs.TabLayout;
@@ -48,6 +50,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +68,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
 
     int isNgay = 0;
     boolean isSelectThu = true;
+    Date isDate;
 
     private TabLayout tabLayout;
     private CardView cvTime;
@@ -131,6 +135,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
             listHoaDonNhapKho.clear();
             listHoaDonBan.addAll(daoBaoCao.getListHoaDonBanByDay(positon, date));
             listHoaDonNhapKho.addAll(daoBaoCao.getListHoaDonNhapByDay(positon, date));
+            isDate = date;  //lấy để set dữ liệu ngày lên bieru dồ
             setUpTablayout();
             Log.i("lengthListThuChi", "Length " + listHoaDonBan.size());
             Log.i("lengthListThuChi", "Length " + listHoaDonNhapKho.size());
@@ -150,6 +155,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
 
         //lắng nghe tablayout và set color
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
@@ -290,6 +296,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         sheetDialogLich.dismiss();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUpChart(boolean isThu) {
 
         lineChart.clear();
@@ -297,16 +304,26 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(false);
 
-        LineDataSet set1 = new LineDataSet(getValuesChart(true), "Data set 1");
-        LineDataSet set2 = new LineDataSet(getValuesChart(false), "Data set 2");
+//        lineChart.setBackground(R.drawable.transparent_background);
+
+
+        lineChart.setDrawGridBackground(true);
+//        lineChart.set
+
+
+        LineDataSet set1 = new LineDataSet(getValuesChart(true), "Tổng thu");
+        LineDataSet set2 = new LineDataSet(getValuesChart(false), "Tông chi");
+
 
         set1.setFillAlpha(110);
         set1.setColor(getResources().getColor(R.color.teal_200));
         set1.setLineWidth(3f);
+        set1.setDrawCircles(false);
 
         set2.setFillAlpha(110);
         set2.setColor(Color.RED);
         set2.setLineWidth(3f);
+        set2.setDrawCircles(false);
 
         if (isThu){
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -325,15 +342,18 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         }
 
 
+        //lấy trục x từ biểu đồ
         XAxis xAxis = lineChart.getXAxis();
-        List<String> mlist = getValueDay();
-        xAxis.setValueFormatter(new MyXValueFormat((ArrayList<String>) mlist));
-//        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new MyXValueFormat(getValueDay()));
+
+        xAxis.setGranularity(1f);       //giới hạn giá trị
 
     }
 
-    public class MyXValueFormat extends ValueFormatter implements IAxisValueFormatter{
+    public static class MyXValueFormat extends ValueFormatter implements IAxisValueFormatter {
         private ArrayList<String> list;
+        public MyXValueFormat(){
+        }
         public MyXValueFormat(ArrayList<String> list){
             this.list = list;
         }
@@ -341,37 +361,129 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
             String ngay = list.get((int) value);
-            return ngay;
+            return value + "$";
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<Entry> getValuesChart(boolean isThu) {
         ArrayList<Entry> values = new ArrayList<>();
-
+        int isLoaiNgay = 0;
         int tongNgay = 0;
-        if (isNgay == 0 || isNgay == 5) tongNgay = 1;
-        else if (isNgay == 1 || isNgay == 3) tongNgay = 7;
-        else tongNgay = 30;
+        if (isNgay == 0 || isNgay == 5){
+            tongNgay = 1;
+            isLoaiNgay = 0;
+        }
+        else if (isNgay == 1 || isNgay == 3){
+            tongNgay = 7;
+            isLoaiNgay = 2;
+        }
+        else{
+            isLoaiNgay = 3;
+            if (listHoaDonBan.size() > 0){
+                int thang = Integer.parseInt(sdfMonth.format(listHoaDonBan.get(0).getNgayBan()));
+                if (thang == 1 || thang ==3 || thang ==3 || thang ==3 || thang ==3 || thang ==3 || thang ==3) tongNgay = 31;
+                else if (thang == 2) tongNgay = 28;
+                else  tongNgay = 30;
+            }else {
+                int thang = Integer.parseInt(sdfMonth.format(Calendar.getInstance().getTime()));
+                if (thang == 1 || thang ==3 || thang ==3 || thang ==3 || thang ==3 || thang ==3 || thang ==3) tongNgay = 31;
+                else if (thang == 2) tongNgay = 28;
+                else  tongNgay = 30;
+            }
+        }
 
-
+        // GET DATA THU
         if (isThu){
-            for (int i = 1 ; i < tongNgay; i++){
-                for (HoaDonBan hb : listHoaDonBan){
-                    if (i == Integer.parseInt(sdfDate.format(hb.getNgayBan()))){
-                        values.add(new Entry(i, Float.valueOf(hb.getTongTien())));
-                    }else {
-                        values.add(new Entry(i, Float.valueOf(i)));
+            // loại ngày 3 là 30 ngày
+            if (isLoaiNgay == 3){
+                for (int i = 1 ; i <= tongNgay; i++){
+                    float tongtien = 0f;
+                    for (HoaDonBan hb : listHoaDonBan){
+                        if (i == Integer.parseInt(sdfDate.format(hb.getNgayBan()))){
+                            tongtien += Float.valueOf(hb.getTongTien());
+                        }
                     }
+                    values.add(new Entry(i, tongtien));
                 }
             }
-        }else {
-            for (int i = 1 ; i < tongNgay; i++){
-                for (HoaDonNhapKho hb : listHoaDonNhapKho){
-                    if (i == Integer.parseInt(sdfDate.format(hb.getNgayNhap()))){
-                        values.add(new Entry(i, Float.valueOf(hb.getTongTien())));
-                    }else {
-                        values.add(new Entry(i, Float.valueOf(i)));
+            //loại ngày 2 là 7 ngày
+            else if (isLoaiNgay == 2){
+                //lấy ngày đầu tuần ở daoBaoCao
+                Calendar cal = Calendar.getInstance();
+                if (listHoaDonBan.size() > 0) cal.setTime(listHoaDonBan.get(0).getNgayBan());
+                else cal.getTime();
+                LocalDate localDate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE));
+                String stringngaydautuan = daoBaoCao.getFirstDayThisWeek(localDate, cal).substring(8);      //cắt 8 ký tự đầu
+                int ngaydautuan = Integer.parseInt(stringngaydautuan);
+
+                for (int i = ngaydautuan ; i <= ngaydautuan+6; i++){
+
+                    float tongtien = 0f;
+                    for (HoaDonBan hb : listHoaDonBan){
+                        int ngayHint = i;
+                        if (ngayHint > 30) ngayHint -= 30;
+                        if (ngayHint == Integer.parseInt(sdfDate.format(hb.getNgayBan()))){
+                            tongtien += Float.valueOf(hb.getTongTien());
+                        }
                     }
+
+                    values.add(new Entry(i, tongtien));
+                }
+                // loại 1 ngày
+            }else {
+                for (int i = 1 ; i <= tongNgay; i++){
+                    float tongtien = 0f;
+                    for (HoaDonBan hb : listHoaDonBan){
+                        tongtien += Float.valueOf(hb.getTongTien());
+                    }
+                    values.add(new Entry(Integer.parseInt(sdfDate.format(isDate)), tongtien));
+                }
+            }
+
+        // GET DATA CHI
+        }else {
+            // loại ngày 3 là 30 ngày
+            if (isLoaiNgay == 3){
+                for (int i = 1 ; i <= tongNgay; i++){
+                    float tongtien = 0f;
+                    for (HoaDonNhapKho hb : listHoaDonNhapKho){
+                        if (i == Integer.parseInt(sdfDate.format(hb.getNgayNhap()))){
+                            tongtien += Float.valueOf(hb.getTongTien());
+                        }
+                    }
+                    values.add(new Entry(i, tongtien));
+                }
+            }
+            //loại ngày 2 là 7 ngày
+            else if (isLoaiNgay == 2){
+                //lấy ngày đầu tuần ở daoBaoCao
+                Calendar cal = Calendar.getInstance();
+                if (listHoaDonBan.size() > 0) cal.setTime(listHoaDonBan.get(0).getNgayBan());
+                else cal.getTime();
+                LocalDate localDate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE));
+                String stringngaydautuan = daoBaoCao.getFirstDayThisWeek(localDate, cal).substring(8); //cắt 8 ký tự đầu
+                int ngaydautuan = Integer.parseInt(stringngaydautuan);
+
+                for (int i = ngaydautuan ; i <= ngaydautuan+6; i++){
+                    float tongtien = 0f;
+                    for (HoaDonNhapKho hb : listHoaDonNhapKho){
+                        int ngayHint = i;
+                        if (ngayHint > 30) ngayHint -= 30;
+                        if (ngayHint == Integer.parseInt(sdfDate.format(hb.getNgayNhap()))){
+                            tongtien += Float.valueOf(hb.getTongTien());
+                        }
+                    }
+                    values.add(new Entry(i, tongtien));
+                }
+            // loại 1 ngày
+            }else {
+                for (int i = 1 ; i <= tongNgay; i++){
+                    float tongtien = 0f;
+                    for (HoaDonNhapKho hb : listHoaDonNhapKho){
+                        tongtien += Float.valueOf(hb.getTongTien());
+                    }
+                    values.add(new Entry(Integer.parseInt(sdfDate.format(isDate)), tongtien));
                 }
             }
         }
@@ -394,7 +506,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
                 }
             }
 
-            //check kh có data thi thang nay
+            //check kh có data thi lay thang nay
             if (listHoaDonBan.size() > 0){
                 mlist.add( i + "/"  +  String.valueOf(sdfMonth.format(listHoaDonBan.get(0).getNgayBan())));
             }else {
@@ -406,8 +518,7 @@ public class FragmentThuChi extends Fragment implements BaocaoAdapterLich.IsenDa
         return mlist;
     }
 
-
-    private void setUpData(boolean isThu) {
+        private void setUpData(boolean isThu) {
 
         int tongNgay = 0;
         if (isNgay == 0 || isNgay == 5) tongNgay = 1;

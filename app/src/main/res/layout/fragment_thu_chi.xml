@@ -104,57 +104,6 @@
                                 android:textSize="18sp"
                                 android:textColor="@color/gray" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:orientation="horizontal">
-
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
-                                        app:cardBackgroundColor="@color/teal_200"
-                                        app:cardCornerRadius="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="Tổng thu"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="30dp"
-                                    android:gravity="center"
-                                    android:orientation="horizontal">
-
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
-                                        app:cardBackgroundColor="@color/red"
-                                        app:cardCornerRadius="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="Tổng chi"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/frg_thuchi_chart"
                                 android:layout_width="match_parent"
