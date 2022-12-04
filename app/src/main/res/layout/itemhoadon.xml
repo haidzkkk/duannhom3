@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rectangle_1"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+
+    android:background="@drawable/a"
+    android:gravity="center"
+  >
+
+    <TextView
+        android:id="@+id/hoadonmakh"
+        android:layout_width="78dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="11dp"
+
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/hoadonmanv"
+        android:layout_width="78dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="40dp"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/hoadonngayban"
+        android:layout_width="185dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="68dp"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/t_ng_c_ng"
+        android:layout_width="117dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="103dp"
+        android:text="tongtien"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/hoadongiao"
+        android:layout_width="51dp"
+        android:layout_height="14dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="328dp"
+        android:layout_marginTop="19dp"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/hoadontongtien"
+        android:layout_width="78dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="328dp"
+        android:layout_marginTop="90dp"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/hoadonthanhtoan"
+        android:layout_width="96dp"
+        android:layout_height="14dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="328dp"
+        android:layout_marginTop="122dp"
+        android:gravity="top" />
+</RelativeLayout>
+
+
+

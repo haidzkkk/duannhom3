@@ -2,7 +2,7 @@ package laptrinhandroid.fpoly.dnnhm3.Entity;
 
 public class ChiTietHoaDonNhap {
     private int id,maHD, maSp;
-    private String   anh,tenSP;
+    private String anh,tenSP;
     private int soLuong;
     private float donGia;
      private float thanhTien;

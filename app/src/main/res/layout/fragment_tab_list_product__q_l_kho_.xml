@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    tools:context="Fragment.Kho.TabListProduct_QLKho_Fragment">
+
+    <RelativeLayout
+        android:id="@+id/rectangle_1"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_tongSPton"
+            android:layout_width="110dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="17dp"
+            android:gravity="top"
+            android:text="3 san pham" />
+
+        <TextView
+            android:id="@+id/b_o_c_o"
+            android:layout_width="76dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="320dp"
+            android:gravity="top"
+            android:text="Báo cáo" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle_2"
+            android:layout_width="180dp"
+            android:layout_height="63dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="#F5F5F5"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/gi_tr_t_n"
+                android:layout_width="110dp"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="6dp"
+                android:gravity="top"
+                android:text="$   Giá trị tồn" />
+            <TextView
+                android:id="@+id/tv_giatriton"
+                android:layout_width="78dp"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="35dp"
+                android:text="10.000đ"
+                android:textColor="#52A33E"
+                android:gravity="top"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle_3"
+            android:layout_width="180dp"
+            android:layout_height="63dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="#F5F5F5"
+            app:cardCornerRadius="10dp" >
+            <TextView
+                android:id="@+id/s_l_ng"
+                android:layout_width="110dp"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="6dp"
+                android:text="**   Số lượng"
+                android:gravity="top"
+                />
+            <TextView
+                android:id="@+id/some_id2"
+                android:layout_width="78dp"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="56dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="35dp"
+                android:text="77"
+                android:textColor="#52A33E"
+                android:gravity="top"
+                />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_lsProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
+
+</LinearLayout>

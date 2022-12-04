@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    màu khi ấn vào nó sẽ đổi màu-->
+    <item android:drawable="@color/teal_700"
+        android:state_pressed="true"/>
+
+<!--    Màu mặc định phải luôn luôn đứng sau không thì không cần cũng được-->
+    <item android:drawable="@color/white"
+        android:state_pressed="false"/>
+
+
+</selector>

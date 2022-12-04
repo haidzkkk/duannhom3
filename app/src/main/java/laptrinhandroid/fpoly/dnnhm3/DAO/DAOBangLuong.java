@@ -24,15 +24,14 @@ public class DAOBangLuong {
 
     public boolean addBangLuong(BangLuong bangLuong) throws SQLException {
 
-        String s1 = "Insert into NhanVien(id,maNV, luongCB,ngayCong,chuNhat,ungLuong,ngayThang) values ( ?,?,?,?,?,?,?)";
+        String s1 = "Insert into NhanVien(maNV, luongCB,ngayCong,chuNhat,ungLuong,ngayThang) values ( ?,?,?,?,?,?)";
         PreparedStatement preparedStatement=objConn.prepareStatement(s1);
-        preparedStatement.setInt(1,bangLuong.getId());
-        preparedStatement.setInt(2,bangLuong.getMaNV());
-        preparedStatement.setFloat(3,bangLuong.getLuongCB());
-        preparedStatement.setInt(4,bangLuong.getNgayCong());
-        preparedStatement.setInt(5,bangLuong.getChuNhat());
-        preparedStatement.setFloat(6,bangLuong.getUngLuong());
-        preparedStatement.setString(7, bangLuong.getNgayThang());
+         preparedStatement.setInt(1,bangLuong.getMaNV());
+        preparedStatement.setFloat(2,bangLuong.getLuongCB());
+        preparedStatement.setInt(3,bangLuong.getNgayCong());
+        preparedStatement.setInt(4,bangLuong.getChuNhat());
+        preparedStatement.setFloat(5,bangLuong.getUngLuong());
+        preparedStatement.setString(6, bangLuong.getNgayThang());
 
         if (preparedStatement.executeUpdate() > 0) {
             preparedStatement.close();

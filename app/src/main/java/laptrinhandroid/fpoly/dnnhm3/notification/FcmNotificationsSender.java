@@ -22,9 +22,9 @@ public class FcmNotificationsSender {
     String titlee;
     String body;
     Activity mActivity;
-    int icon;
+    String icon;
 //    {
-//        "to":"bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+//        "to":"cynNKyKsQISKsrAesXL4GS:APA91bEq2UFYWa92Kr9uVVpuHFqBxamZMlfR10JIAvX9uzets-7VUtCKJQLZPElWzgc2Co4iOP5KpR9EwaUNIzwWf_RC3ROIN9Aw9Nq-Zf2iqaJbsYMqTOBaYIScThjoGmbZIeIb5ZoB",
 //                "notification":{
 //            "title":"Portugal vs. Denmark",
 //                    "body":"great match!"
@@ -35,12 +35,12 @@ public class FcmNotificationsSender {
     private final String postUrl = "https://fcm.googleapis.com/fcm/send";
     private final String fcmServerKey = "AAAAbYdXSiU:APA91bFEhmZ_Kg0w07UjDdcGGyzbpfpoBzDcGlx0q2bVxkehF-MFmoTGNJ36ets526nBcvj6cqkbqKWqUJYSXJsRBX2AMrIK1QULA0x8aoTHwZ-m96leQtBcO4MaDJAicmHWeYiyzbOO";
 
-    public FcmNotificationsSender(String userFcmToken, String titlee, String body, int icon, Activity mActivity) {
+    public FcmNotificationsSender(String userFcmToken, String titlee, String body,  Activity mActivity) {
         this.userFcmToken = userFcmToken;
         this.titlee = titlee;
         this.body = body;
         this.mActivity = mActivity;
-        this.icon = icon;
+
     }
 
     public void SendNotifications() {
@@ -52,8 +52,7 @@ public class FcmNotificationsSender {
             JSONObject notiObject = new JSONObject();
             notiObject.put("title", titlee);
             notiObject.put("body", body);
-            notiObject.put("icon", icon);
-            //  notiObject.put("icon", "icon1"); // enter icon that exists in drawable only
+             //  notiObject.put("icon", "icon1"); // enter icon that exists in drawable only
             mainObj.put("notification", notiObject);
 
 
@@ -66,7 +65,7 @@ public class FcmNotificationsSender {
 
                 }
             }) {
-                @Override
+                @Override//Truyền parameter để  yêu cầu hành động (get,post..)
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> header = new HashMap<>();
                     header.put("content-type", "application/json");

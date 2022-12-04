@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/teal_700"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:padding="20dp"
+    android:id="@+id/carviewsp"
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="8dp"
+            android:visibility="gone"
+            android:background="@drawable/a"
+            android:id="@+id/relaysp"
+            android:paddingBottom="8dp">
+                <Button
+                    android:id="@+id/removeBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_baseline_add_24"/>
+                <EditText
+                    android:id="@+id/itemQuanEt"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:inputType="number"
+                    android:minEms="1"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+                <Button
+                    android:id="@+id/addBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_baseline_add_24"
+                    android:backgroundTint="@color/black"/>
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/SpImg"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-30dp"
+            android:src="@drawable/common_google_signin_btn_icon_disabled" />
+
+        <TextView
+            android:id="@+id/txttensanpham"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="abc"
+           android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:textSize="30dp" />
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+

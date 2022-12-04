@@ -28,19 +28,17 @@ public class DAOChamCong implements Serializable {
 
     public boolean addChamCong(ChamCong chamCong) throws SQLException {
 
-        Statement statement = null;
-        if (objConn != null) {
+         if (objConn != null) {
 
-            statement = objConn.createStatement();
-            String s1 = "Insert into ChamCong(maNV, gioBatDau,gioKetThuc,ngay,xacNhanChamCong) values (" +
-                    "'" + chamCong.getMaNV() + "'," +
-                    "'" + chamCong.getGioBatDau() + "'," +
-                    "'" + chamCong.getGioKetThuc() + "'," +
-                    "'" + chamCong.getNgay() + "'," +
-                    "'" + chamCong.getXacNhanChamCong() + "'," +
-                    "')";
-            if (statement.executeUpdate(s1) > 0) {
-                statement.close();
+             String s1 = "Insert into ChamCong(maNV, gioBatDau,gioKetThuc,ngay,xacNhanChamCong) values (?,?,?,?,?)";
+            PreparedStatement preparedStatement = objConn.prepareStatement(s1);
+            preparedStatement.setInt(1, chamCong.getMaNV());
+            preparedStatement.setObject(2, chamCong.getGioBatDau());
+            preparedStatement.setObject(3, chamCong.getGioKetThuc());
+            preparedStatement.setDate(4, chamCong.getNgay());
+            preparedStatement.setInt(5, chamCong.getXacNhanChamCong());
+            if (preparedStatement.executeUpdate() > 0) {
+                preparedStatement.close();
                 return true;
             }
         }
@@ -83,13 +81,14 @@ public class DAOChamCong implements Serializable {
 
         return list;
     }
-    public ChamCong getChamCong(int maNV) throws SQLException {
-        ChamCong chamCong=null;
+    public ChamCong getChamCong(int maNV ) throws SQLException {
+         ChamCong chamCong=null;
         if (objConn != null) {
-             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT  * FROM  ChamCong where maNV='" + maNV + "'";
-            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT  * FROM  ChamCong where maNV=? AND ngay=?";
+            PreparedStatement statement = objConn.prepareStatement(sql);// Tạo đối tượng Statement.
+            statement.setInt(1,maNV);
+            statement.setDate(2,new Date(System.currentTimeMillis()) );
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 chamCong=new ChamCong(rs.getInt(1), rs.getInt(2), rs.getTime(3), rs.getTime(4), rs.getDate(5), rs.getInt(6));// Đọc dữ liệu từ ResultSet
             }
@@ -106,6 +105,23 @@ public class DAOChamCong implements Serializable {
             getList = new ArrayList<>();
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
             String sql = " SELECT  * FROM  ChamCong where maNV='" + maNV + "' AND  ngay like '" + ngay + "%'";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                getList.add(new ChamCong(rs.getInt(1), rs.getInt(2), rs.getTime(3), rs.getTime(4), rs.getDate(5), rs.getInt(6)));
+            }
+            statement.close();
+            return getList;
+        }
+
+
+        return null;
+    }
+    public List<ChamCong> getListChamCong(int maNV) throws SQLException {
+        List<ChamCong> getList;
+        if (objConn != null) {
+            getList = new ArrayList<>();
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = " SELECT  * FROM  ChamCong where maNV='" + maNV + "'";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 getList.add(new ChamCong(rs.getInt(1), rs.getInt(2), rs.getTime(3), rs.getTime(4), rs.getDate(5), rs.getInt(6)));

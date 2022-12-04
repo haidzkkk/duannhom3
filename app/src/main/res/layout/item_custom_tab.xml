@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="70dp"
+    android:orientation="vertical">
+
+<TextView
+    android:id="@+id/item_tab_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Tổng thu"
+    android:gravity="center"
+    android:textSize="17sp"
+    android:padding="3dp"
+    android:textColor="@color/black"
+    />
+
+    <TextView
+        android:id="@+id/item_tab_tien"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="8.233.232.111 đ"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="3dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

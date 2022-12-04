@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hủy"/>
         </LinearLayout>
-        <Button
+         <Button
             android:id="@+id/btn_themanhsp"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -111,6 +111,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             />
+ 
 
 
     </LinearLayout>

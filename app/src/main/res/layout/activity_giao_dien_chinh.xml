@@ -85,6 +85,7 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
+                                        android:id="@+id/cuaHang"
                                         android:orientation="vertical">
 
                                         <ImageView
@@ -113,6 +114,8 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
+                                        android:id="@+id/donHang"
+
                                         android:orientation="vertical">
 
                                         <ImageView
@@ -126,7 +129,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:gravity="center"
-                                            android:text="Sản phẩm"
+                                            android:text="Đơn hàng"
                                             android:textColor="@color/black"
                                             android:textSize="18sp" />
                                     </LinearLayout>
@@ -141,7 +144,9 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:id="@+id/sanPham"
+                                        >
 
                                         <ImageView
                                             android:layout_width="70dp"
@@ -167,9 +172,11 @@
                                     app:cardUseCompatPadding="true">
 
                                     <LinearLayout
+
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:id="@+id/btnstartKho">
 
                                         <ImageView
                                             android:layout_width="70dp"
@@ -196,6 +203,8 @@
                                     app:cardUseCompatPadding="true">
 
                                     <LinearLayout
+                                        android:id="@+id/baoCao"
+
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:orientation="vertical">

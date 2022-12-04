@@ -29,7 +29,6 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         recyclerView = view.findViewById(R.id.rcy);
         edit = view.findViewById(R.id.edit);
         close = view.findViewById(R.id.close);
-
         return view;
     }
 

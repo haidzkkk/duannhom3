@@ -1,19 +1,23 @@
 package laptrinhandroid.fpoly.dnnhm3.Fragment.SanPham;
 
-import android.annotation.SuppressLint;
+ 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
-
+ 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+=======
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+ 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+ import android.widget.Button;
 
 import android.widget.Toast;
 
@@ -27,15 +31,19 @@ import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterSanPham.LoaiSanPhamAdapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOLoaiSanPham;
 
 import laptrinhandroid.fpoly.dnnhm3.Entity.LoaiSP;
-import laptrinhandroid.fpoly.dnnhm3.R;
+ 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+ import laptrinhandroid.fpoly.dnnhm3.R;
 
 
 public class FragmentDanhMuc extends Fragment {
-     RecyclerView recyclerView;
+      RecyclerView recyclerView;
      FloatingActionButton floatingActionButton;
     private DAOLoaiSanPham daoLoaiSanPham;
     private LoaiSanPhamAdapter adapter;
     private ArrayList<LoaiSP> list = new ArrayList<>();
+ 
 
     public FragmentDanhMuc() {
         // Required empty public constructor
@@ -47,7 +55,7 @@ public class FragmentDanhMuc extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+ 
         View view= inflater.inflate(R.layout.fragment_danh_muc, container, false);
         recyclerView= view.findViewById(R.id.rcv_danhmuc);
         floatingActionButton = view.findViewById(R.id.flbtn_danhmuc);
@@ -62,7 +70,8 @@ public class FragmentDanhMuc extends Fragment {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+         V 
+         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insert_danhmuc();
@@ -70,13 +79,12 @@ public class FragmentDanhMuc extends Fragment {
         });
         return view;
     }
-
-    @SuppressLint("MissingInflatedId")
+ 
     private void insert_danhmuc() {
         AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
         LayoutInflater inflater= getLayoutInflater();
         View view=inflater.inflate(R.layout.dialog_danhmuc,null);
-        TextInputEditText ed_tendanhmuc= view.findViewById(R.id.ed_tendanhmuc);
+         TextInputEditText ed_tendanhmuc= view.findViewById(R.id.ed_tendanhmuc);
         Button btn_them= view.findViewById(R.id.btn_themdanhmuc);
         builder.setView(view);
         Dialog dialog=builder.create();
@@ -103,7 +111,8 @@ public class FragmentDanhMuc extends Fragment {
     public void onResume(){
         super.onResume();
         adapter.notifyDataSetChanged();
-    }
+ 
+     }
 
 
 }

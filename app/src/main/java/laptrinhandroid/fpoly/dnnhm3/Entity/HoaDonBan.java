@@ -1,8 +1,9 @@
 package laptrinhandroid.fpoly.dnnhm3.Entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class HoaDonBan {
+public class HoaDonBan implements Serializable {
     private int maHDBan;
     private int maNV, maKH;
     private Date ngayBan;
@@ -20,7 +21,7 @@ public class HoaDonBan {
         this.maKH = maKH;
     }
 
-    public HoaDonBan(int maNV, int maKH, Date ngayBan, float tongTien) {
+    public HoaDonBan(int maNV, int maKH, int anInt, Date ngayBan, float tongTien) {
         this.maNV = maNV;
         this.maKH = maKH;
         this.ngayBan = ngayBan;

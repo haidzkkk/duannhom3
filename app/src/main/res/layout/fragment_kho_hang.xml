@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.Fragment_baocao.FragmentKhoHang"
+    android:background="@color/gray_white"
+    android:paddingTop="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/baocao_lailo_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:paddingTop="5dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/icon_khohang"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:id="@+id/lailo_tvloinhuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Giá trị tồn kho"
+                        style="@style/BaoCao_tvtitle"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/khohang_tv_giatritonkho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1.531.000  đ"
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/teal_200"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BaoCao_tvtitle"
+                        android:text="Xem chi tiết báo cáo"
+                        android:textColor="@color/gray" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/khohang_cv_soluong"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_margin="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                app:cardCornerRadius="30dp">
+                                <TextView
+                                    android:id="@+id/khohang_tv_soluong"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|end"
+                                    android:paddingEnd="20dp"
+                                    android:text="10"
+                                    android:textColor="@color/teal_700"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold" />
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="5dp"
+                                android:layout_marginLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Số lượng"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tổng hợp tất cả các giá trị và số lượng sản phẩm "
+                                    android:textSize="10sp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/khohang_cv_conban"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_margin="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                app:cardCornerRadius="30dp">
+                                <TextView
+                                    android:id="@+id/khohang_tv_conban"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|end"
+                                    android:paddingEnd="20dp"
+                                    android:text="10"
+                                    android:textColor="@color/blue"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold" />
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="5dp"
+                                android:layout_marginLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sản phẩm còn bán"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tổng hợp giá trị và số lượng sản phẩm còn bán "
+                                    android:textSize="10sp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/khohang_cv_hethang"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_margin="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                app:cardCornerRadius="30dp">
+                                <TextView
+                                    android:id="@+id/khohang_tv_hethang"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|end"
+                                    android:paddingEnd="20dp"
+                                    android:text="0"
+                                    android:textColor="@color/red"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold" />
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="5dp"
+                                android:layout_marginLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sản phẩm hết hàng"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tổng hợp  sản phẩm hết hàng"
+                                    android:textSize="10sp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="center|bottom"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/khohang_btn_phantichkhohang"
+            style="@style/BaoCao_tvtitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="Chi tiết kho hàng"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

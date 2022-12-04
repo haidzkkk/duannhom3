@@ -17,6 +17,13 @@ public class HoaDonNhapKho {
         this.ngayNhap = ngayNhap;
         this.tongTien = tongTien;
     }
+    public HoaDonNhapKho(int maHDNhap, int maNV, int maSP, Date ngayNhap,  float tongTien) {
+        this.maHDNhap = maHDNhap;
+        this.maNV = maNV;
+        this.maSP = maSP;
+        this.ngayNhap = ngayNhap;
+        this.tongTien = tongTien;
+    }
 
     public int getMaNV() {
         return maNV;

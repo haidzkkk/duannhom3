@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_topsp_tv_id"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:text="1"
+            android:textSize="13sp"
+            android:gravity="center"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_margin="10sp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:id="@+id/item_topsp_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/red"/>
+        </androidx.cardview.widget.CardView>
+        
+        <TextView
+            android:id="@+id/item_topsp_tv_name"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="Tranh dán tường"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            style="@style/BaoCao_tvtitle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_topsp_tv_soluong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Sl: "
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="end|bottom"
+                android:paddingRight="5dp"/>
+
+            <TextView
+                android:id="@+id/item_topsp_tv_tien"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="doanh thu: 8"
+                android:textSize="10sp"
+                android:gravity="end|center_vertical"
+                android:paddingRight="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
