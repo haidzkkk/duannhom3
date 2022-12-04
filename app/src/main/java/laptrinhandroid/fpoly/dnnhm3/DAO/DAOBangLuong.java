@@ -1,17 +1,18 @@
 package laptrinhandroid.fpoly.dnnhm3.DAO;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import laptrinhandroid.fpoly.dnnhm3.Entity.BangLuong;
-import laptrinhandroid.fpoly.dnnhm3.Entity.ChamCong;
-import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
+
 import laptrinhandroid.fpoly.dnnhm3.JDBC.DbSqlServer;
 
 public class DAOBangLuong {
@@ -23,34 +24,42 @@ public class DAOBangLuong {
     }
 
     public boolean addBangLuong(BangLuong bangLuong) throws SQLException {
+        BangLuong chamCong = null;
+        if (objConn != null) {
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = "select * from BangLuong where ngayThang like '" + bangLuong.getNgayThang() + "%'";
+            ResultSet rs = statement.executeQuery(sql);
+            boolean b = true;
+            while (rs.next()) {
+                b = false;
+            }
+            if (b) {
+                String s1 = "Insert into BangLuong(maNV, luongCB,ungLuong,ngayThang,thuong) values ( ?,?,?,?,?)";
+                PreparedStatement preparedStatement = objConn.prepareStatement(s1);
+                preparedStatement.setInt(1, bangLuong.getMaNV());
+                preparedStatement.setFloat(2, bangLuong.getLuongCB());
+                preparedStatement.setFloat(3, bangLuong.getUngLuong());
+                preparedStatement.setString(4, bangLuong.getNgayThang());
+                preparedStatement.setFloat(5, bangLuong.getThuong());
 
-        String s1 = "Insert into NhanVien(maNV, luongCB,ngayCong,chuNhat,ungLuong,ngayThang) values ( ?,?,?,?,?,?)";
-        PreparedStatement preparedStatement=objConn.prepareStatement(s1);
-         preparedStatement.setInt(1,bangLuong.getMaNV());
-        preparedStatement.setFloat(2,bangLuong.getLuongCB());
-        preparedStatement.setInt(3,bangLuong.getNgayCong());
-        preparedStatement.setInt(4,bangLuong.getChuNhat());
-        preparedStatement.setFloat(5,bangLuong.getUngLuong());
-        preparedStatement.setString(6, bangLuong.getNgayThang());
-
-        if (preparedStatement.executeUpdate() > 0) {
-            preparedStatement.close();
-            return true;
+                if (preparedStatement.executeUpdate() > 0) {
+                    preparedStatement.close();
+                    return true;
+                }
+                preparedStatement.close();
+            }
         }
-        preparedStatement.close();
         return false;
     }
 
-    public boolean updateBangLuong(BangLuong bangLuong, int maNV) throws SQLException {
-        String sql = "UPDATE NhanVien  SET " + " luongCB =?," + "ngayCong=?" + ",chuNhat=?" + ",ungLuong=?" + ",thuong=?" +",ngayThang=?" + " WHERE maNv='" + maNV + "';";
+    public boolean updateBangLuong(BangLuong bangLuong  ) throws SQLException {
+        String sql = "UPDATE BangLuong  SET " + " luongCB =?," + "ungLuong=?" + ",thuong=?" + ",ngayThang=?" + " WHERE maNv='" + bangLuong.getMaNV() + "' and id='" + bangLuong.getId() + "';";
         PreparedStatement preparedStatement = objConn.prepareStatement(sql);
         preparedStatement.setFloat(1, bangLuong.getLuongCB());
-        preparedStatement.setInt(2, bangLuong.getNgayCong());
-        preparedStatement.setInt(3, bangLuong.getChuNhat());
-        preparedStatement.setFloat(4, bangLuong.getUngLuong());
-        preparedStatement.setFloat(5, bangLuong.getThuong());
-        preparedStatement.setString(7, bangLuong.getNgayThang());
-        if (preparedStatement.executeUpdate(sql) > 0) {
+        preparedStatement.setFloat(2, bangLuong.getUngLuong());
+        preparedStatement.setFloat(3, bangLuong.getThuong());
+        preparedStatement.setString(4, bangLuong.getNgayThang());
+        if (preparedStatement.executeUpdate() > 0) {
             preparedStatement.close();
             return true;
         }
@@ -59,22 +68,24 @@ public class DAOBangLuong {
 
     public boolean deleteBangLuong(int maNv) throws SQLException {
         Statement statement = objConn.createStatement();
-        String sql = "Delete from NhanVien where maNv='" + maNv + "'";
+        String sql = "Delete from BangLuong where maNv='" + maNv + "'";
         if (statement.executeUpdate(sql) > 0) {
             statement.close();
             return true;
         }
         return false;
     }
+
     public BangLuong getBangLuong(int maNV) throws SQLException {
         BangLuong chamCong = null;
         if (objConn != null) {
+            CalendarDay calendarDay=CalendarDay.today();
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT  * FROM  ChamCong where maNV='" + maNV + "'";
+            String sql = " SELECT  * FROM  BangLuong where maNV='" + maNV + "' and MONTH(ngayThang)='"+calendarDay.getYear()+ "'and DAY(ngayThang)='"+calendarDay.getMonth()+"'";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
 
-                chamCong = new BangLuong(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4), rs.getInt(5), rs.getFloat(6),rs.getFloat(7) ,rs.getString(8) );
+                chamCong = new BangLuong(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6));
             }
             statement.close();
             if (chamCong != null) {
@@ -85,15 +96,15 @@ public class DAOBangLuong {
 
         return null;
     }
-    public BangLuong getBangLuong(int maNV,String ngayThang) throws SQLException {
+
+    public BangLuong getBangLuong(int maNV, String ngayThang) throws SQLException {
         BangLuong chamCong = null;
         if (objConn != null) {
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT  * FROM  ChamCong where maNV='"+maNV+"' ,ngayThang='"+ngayThang+"'";
+            String sql = " SELECT  * FROM  BangLuong where maNV='" + maNV + "' and ngayThang='" + ngayThang + "'";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-
-                chamCong = new BangLuong(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4), rs.getInt(5), rs.getFloat(6),rs.getFloat(7) ,rs.getString(8) );
+                chamCong = new BangLuong(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6));
             }
             statement.close();
             if (chamCong != null) {
@@ -105,16 +116,17 @@ public class DAOBangLuong {
         return null;
     }
 
-    public List<BangLuong> getListBangLuong(int maNV) throws SQLException {
-        List<BangLuong> list = new ArrayList<>();
+    public HashMap<Integer, Integer> getTongSoGioLamNhanVien() throws SQLException {
+        CalendarDay calendarDay=CalendarDay.today();
+        String s = " select maNV,sum(DATEDIFF(hour, gioBatDau,gioKetThuc))  from ChamCong where xacNhanChamCong=1  and MONTH(ngay)=12 group by maNV order by sum(DATEDIFF(hour, gioBatDau,gioKetThuc)) DESC";
+        HashMap<Integer, Integer> list;
         if (objConn != null) {
+            list = new HashMap<>();
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = "SELECT * FROM  BangLuong where maNV='" + maNV + "'";
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-            ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery(s);
             while (rs.next()) {
-                list.add(new BangLuong(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4),
-                        rs.getInt(5), rs.getFloat(6), rs.getFloat(7), rs.getString(8)));// Đọc dữ liệu từ ResultSet
+                list.put(rs.getInt(1), rs.getInt(2));
             }
             statement.close();// Đóng kết nối
             return list;
@@ -122,4 +134,37 @@ public class DAOBangLuong {
         return null;
     }
 
+    public List<BangLuong> getListBangLuong(int maNV, String ngay) throws SQLException {
+        List<BangLuong> list = new ArrayList<>();
+        if (objConn != null) {
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = "SELECT * FROM  BangLuong where maNV='" + maNV + "' and   ngayThang like '" + ngay + "%'";
+            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                list.add(new BangLuong(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6)));
+                // Đọc dữ liệu từ ResultSet
+            }
+            statement.close();// Đóng kết nối
+            return list;
+        }
+        return null;
+    }
+
+    public List<BangLuong> getListBangLuong(int maNV) throws SQLException {
+        List<BangLuong> list = new ArrayList<>();
+        if (objConn != null) {
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = "SELECT * FROM  BangLuong where maNV='" + maNV + "'  ";
+            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                list.add(new BangLuong(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6)));
+                // Đọc dữ liệu từ ResultSet
+            }
+            statement.close();// Đóng kết nối
+            return list;
+        }
+        return null;
+    }
 }

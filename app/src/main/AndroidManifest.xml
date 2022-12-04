@@ -17,12 +17,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DựÁnNhóm3"
         tools:targetApi="31">
+
         <activity
-            android:name=".List_Cham_Cong"
+            android:name=".Activity.AddNhanVien"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.BaoCaoPhanTichActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.BaoCaoDonhangActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
         </activity>
         <activity
             android:name=".Activity.BaoCaoActivity"
@@ -30,17 +46,64 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+        </activity> <activity
+        android:name=".Activity.SanPhamActivity"
+        android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
         <activity
-            android:name=".Activity.hoadon11111"
+            android:name=".Activity.ListChamCongBangLuong"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
+            android:name=".Activity.QuanLyKho"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.ChiTietNhanVien"
+            android:exported="false"
+            android:screenOrientation="unspecified">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.QuanLiNhanVien"
+            android:exported="false"
+            android:screenOrientation="unspecified">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Activity.XepLoai"
+            android:exported="false"
+            android:screenOrientation="unspecified">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.hoadon11111"
+            android:exported="false"
+            android:screenOrientation="unspecified">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.login"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,19 +131,26 @@
 
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".Activity.MainActivityhoadon"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".Activity.GiaoDienChinh"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:screenOrientation="unspecified"></activity>
+
+
         <activity
-            android:name=".Activity.QuanLyKho"
-            android:exported="true"></activity>
+            android:name=".Activity.ThongBao"
+            android:exported="true"
+            android:screenOrientation="unspecified" />
         <activity
-            android:name=".Activity.SanPhamActivity"
-            android:exported="true" />
+            android:name=".Activity.ShowChiTiet"
+            android:exported="true"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

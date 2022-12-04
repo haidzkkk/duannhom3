@@ -24,11 +24,11 @@ import laptrinhandroid.fpoly.dnnhm3.R;
 
 public class MainActivityhoadon extends AppCompatActivity {
     ViewPager2 viewPager;
- TabLayout tabLayout;
-viewadapter viewadapter;
-Toolbar toolbar;
-ImageView imageView1,imageView2,img3;
-EditText editText;
+    TabLayout tabLayout;
+    viewadapter viewadapter;
+    Toolbar toolbar;
+    ImageView imageView1, imageView2, img3;
+    EditText editText;
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,26 +36,29 @@ EditText editText;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activityhoadon);
-        viewPager=findViewById(R.id.viewpager2);
-        tabLayout=findViewById(R.id.tablayout);
-        toolbar=findViewById(R.id.toobar1);
+        viewPager = findViewById(R.id.viewpager2);
+        tabLayout = findViewById(R.id.tablayout);
+        toolbar = findViewById(R.id.toobar1);
         toolbar.setTitle("don hang");
         setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_chevron_left_24);
-        editText=findViewById(R.id.edttimkiem);
-        viewadapter= new viewadapter(this);
+        editText = findViewById(R.id.edttimkiem);
+        viewadapter = new viewadapter(this);
         viewPager.setAdapter(viewadapter);
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:tab.setText("don hang");
-                    break;
-                    case 1:tab.setText("dang cho");
+                switch (position) {
+                    case 0:
+                        tab.setText("don hang");
                         break;
-                    case 2:tab.setText("dang theo doi");
+                    case 1:
+                        tab.setText("dang cho");
+                        break;
+                    case 2:
+                        tab.setText("dang theo doi");
                         break;
                 }
             }
@@ -64,7 +67,7 @@ EditText editText;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
 
@@ -73,10 +76,10 @@ EditText editText;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater= getMenuInflater();
-         menuInflater.inflate(R.menu.item,menu);
-        MenuItem  menuItem=menu.findItem(R.id.menuseach);
-       final android.widget.SearchView searchView= (android.widget.SearchView) MenuItemCompat.getActionView(menuItem);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.item, menu);
+        MenuItem menuItem = menu.findItem(R.id.menuseach);
+        final android.widget.SearchView searchView = (android.widget.SearchView) MenuItemCompat.getActionView(menuItem);
         return super.onCreateOptionsMenu(menu);
     }
 

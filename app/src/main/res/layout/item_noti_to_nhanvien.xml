@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="15dp"
-    android:background="@color/white">
+    android:foreground="?selectableItemBackground"
+    android:id="@+id/mRelativeLayout"
+    android:background="#2F2EF837">
 
     <TextView
         android:id="@+id/ngay"
@@ -22,6 +24,8 @@
         android:layout_below="@id/ngay"
         android:textColor="@color/black"
         android:text="Đã xác nhận trạng thái"
+        android:layout_toLeftOf="@id/xacNhan"
+        android:layout_alignParentLeft="true"
         android:textSize="15sp"
         android:textStyle="bold" />
     <TextView

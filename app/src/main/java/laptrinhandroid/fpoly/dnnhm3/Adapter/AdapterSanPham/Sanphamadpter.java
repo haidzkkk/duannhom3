@@ -1,5 +1,7 @@
 package laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterSanPham;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -65,15 +67,15 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
             @Override
             public void onClick(View view) {
 
-               holder.relativeLayout.setVisibility(View.VISIBLE);
-               holder.txtimg.setVisibility(View.GONE);
+                holder.relativeLayout.setVisibility(View.VISIBLE);
+                holder.txtimg.setVisibility(View.GONE);
 
 
             }
         });
 
 
-          int[] i = {0};
+        int[] i = {0};
         holder.BTN2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,15 +84,16 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
                 if (i[0] <= 10) {
                     holder.editText.setText(i[0] + "");
                 }
-               if(i[0]>=1){
-                   holder.editText.getText();
-                   Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
+                if (i[0] >= 1) {
+                    holder.editText.getText();
+                    Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
 
-               }
+                }
             }
         });
         holder.editText.addTextChangedListener(new TextWatcher() {
-            CoordinatorLayout coordinatorLayout ;
+            CoordinatorLayout coordinatorLayout;
+
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -101,11 +104,13 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
 
 //                Toast.makeText(context.getApplicationContext(), Integer.parseInt(charSequence.toString())*2+"", Toast.LENGTH_SHORT).show();
                 Snackbar snackbar = Snackbar
-                        .make(holder.relativeLayout,Integer.parseInt(charSequence.toString())*2+"" , Snackbar.LENGTH_LONG)
+                        .make(holder.relativeLayout, Integer.parseInt(charSequence.toString()) * 2 + "", Snackbar.LENGTH_LONG)
                         .setAction("Undo Clicked", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                context.startActivity(new Intent(context,banhang.class));
+                                Intent intent = new Intent(context, banhang.class);
+                                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
 
                             }
                         });
@@ -126,19 +131,18 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
             @Override
             public void onClick(View view) {
                 i[0]--;
-    if(i[0]>=0){
-    holder.editText.setText(i[0]+"");
-    if (i[0]==0) {
-        holder.relativeLayout.setVisibility(View.GONE);
-    }
-}
+                if (i[0] >= 0) {
+                    holder.editText.setText(i[0] + "");
+                    if (i[0] == 0) {
+                        holder.relativeLayout.setVisibility(View.GONE);
+                    }
+                }
             }
         });
 
 
+    }
 
-
-}
     @Override
     public int getItemCount() {
         return list.size();
@@ -150,8 +154,9 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
         ImageView txtimg;
         EditText editText;
         Button BTN1, BTN2;
-   RelativeLayout relativeLayout;
-   CardView cardViewsp;
+        RelativeLayout relativeLayout;
+        CardView cardViewsp;
+
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -160,13 +165,12 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
             BTN1 = itemView.findViewById(R.id.removeBtn);
             BTN2 = itemView.findViewById(R.id.addBtn);
             editText = itemView.findViewById(R.id.itemQuanEt);
-            relativeLayout=itemView.findViewById(R.id.relaysp);
-            cardViewsp=itemView.findViewById(R.id.carviewsp);
+            relativeLayout = itemView.findViewById(R.id.relaysp);
+            cardViewsp = itemView.findViewById(R.id.carviewsp);
 
         }
 
     }
-
 
 
 }

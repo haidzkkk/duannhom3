@@ -5,9 +5,7 @@ public class HoaDonNhapKho {
     private int maHDNhap;
     private int maNV, maSP;
     private Date ngayNhap;
-
     private float tongTien;
-
     public HoaDonNhapKho() {
     }
 

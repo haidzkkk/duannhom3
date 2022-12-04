@@ -1,6 +1,7 @@
 package laptrinhandroid.fpoly.dnnhm3.XuLiNgay;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,7 @@ public class DayViewDecoratorNoConfirm implements com.prolificinteractive.materi
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5, R.color.black));
+        view.addSpan(new DotSpan(5, Color.parseColor("#CD3100")));
      }
 
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số lương bạn có thể ứng không quá 70% số lương ngày công trong tháng"
+        android:textColor="@color/black"
+        android:textSize="21sp" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:drawableStart="@drawable/ic_baseline_error_24"
+        android:gravity="center"
+        android:text="Mức ứng tối thiểu là 200,000đ"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:gravity="center"
+        android:text="Hạn mức khả dụng"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:gravity="center"
+        android:text="0đ"
+        android:id="@+id/hanMuc"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="29sp" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:gravity="center"
+        android:text="Đã yêu cầu ứng: 0đ"
+        android:id="@+id/soTienDaUng"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@id/soTien"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:text="0đ"
+        android:layout_alignParentRight="true"
+        android:id="@+id/soTien"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+</RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:background="@color/black"
+        android:fontFamily="serif"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:text="Ứng tiền công"
+        android:textAllCaps="false"
+        android:id="@+id/ung"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

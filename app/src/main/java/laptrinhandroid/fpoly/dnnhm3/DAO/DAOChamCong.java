@@ -48,14 +48,13 @@ public class DAOChamCong implements Serializable {
     }
 
     public boolean updateChamCong(ChamCong chamCong) throws SQLException {
-        String sql = "UPDATE ChamCong  SET " + "maNV = ?," + " gioBatDau =?," + "gioKetThuc=?" + ",ngay=?" + ",xacNhanChamCong=?" + " WHERE ngay='" + new Date(System.currentTimeMillis()) + "';";
+        String sql = "UPDATE ChamCong  SET " +  " gioBatDau =?," + "gioKetThuc=?" + ",ngay=?" + ",xacNhanChamCong=?" + " WHERE ngay='" + chamCong.getNgay() + "' and maNV='"+chamCong.getMaNV()+"' ";
         if (objConn != null) {
             PreparedStatement preparedStatement = objConn.prepareStatement(sql);
-            preparedStatement.setInt(1, chamCong.getMaNV());
-            preparedStatement.setObject(2, chamCong.getGioBatDau());
-            preparedStatement.setObject(3, chamCong.getGioKetThuc());
-            preparedStatement.setDate(4, chamCong.getNgay());
-            preparedStatement.setInt(5, chamCong.getXacNhanChamCong());
+             preparedStatement.setObject(1, chamCong.getGioBatDau());
+            preparedStatement.setObject(2, chamCong.getGioKetThuc());
+            preparedStatement.setDate(3, chamCong.getNgay());
+            preparedStatement.setInt(4, chamCong.getXacNhanChamCong());
             if (preparedStatement.executeUpdate() > 0) {
                 return true;
             }
@@ -84,7 +83,7 @@ public class DAOChamCong implements Serializable {
     public ChamCong getChamCong(int maNV ) throws SQLException {
          ChamCong chamCong=null;
         if (objConn != null) {
-            String sql = "SELECT  * FROM  ChamCong where maNV=? AND ngay=?";
+            String sql = "SELECT  *  FROM  ChamCong where maNV=? AND ngay=?";
             PreparedStatement statement = objConn.prepareStatement(sql);// Tạo đối tượng Statement.
             statement.setInt(1,maNV);
             statement.setDate(2,new Date(System.currentTimeMillis()) );

@@ -52,17 +52,13 @@ public class SanPhamadapter extends RecyclerView.Adapter<SanPhamadapter.SanPhamV
     @NonNull
     @Override
     public SanPhamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View viewItem = inflater.inflate(R.layout.item_sanpham, parent, false);
-        SanPhamadapter.SanPhamViewHolder sanPhamViewHolder = new SanPhamadapter.SanPhamViewHolder(viewItem);
-        viewAlert = parent;
-        return sanPhamViewHolder;
+
+        return new SanPhamViewHolder(  LayoutInflater.from(context).inflate(R.layout.item_sanpham, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull SanPhamViewHolder holder, int position) {
-        daoSanPham = new DAOSanPham();
-        SanPham sanPham = arrSP.get(position);
+         SanPham sanPham = arrSP.get(position);
         if(sanPham != null) {
             try {
                 holder.img_SP.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()));
@@ -117,7 +113,7 @@ public class SanPhamadapter extends RecyclerView.Adapter<SanPhamadapter.SanPhamV
             sanPham=arrSP.get(position);
             String LoaiSP = (String) spn_loaiSP.getSelectedItem();
             String[] maloai = LoaiSP.split("\\.");
-            sanPham.setTenSP(ed_tenSanPham.getText().toString());
+            sanPham.setTenSP(ed_tenSanPham.getText().toString()+"");
             sanPham.setGiaNhap(Float.parseFloat(ed_giavon.getText().toString()));
             sanPham.setGiaBan(Float.parseFloat(ed_giaban.getText().toString()));
             sanPham.setLoaiSP(Integer.parseInt(maloai[0]));

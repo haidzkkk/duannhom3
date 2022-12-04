@@ -3,15 +3,14 @@ package laptrinhandroid.fpoly.dnnhm3.DAO;
 import androidx.fragment.app.FragmentActivity;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
 import laptrinhandroid.fpoly.dnnhm3.JDBC.DbSqlServer;
 
@@ -25,7 +24,7 @@ public class DAONhanVien {
 
     public boolean addNhanVien(NhanVien nhanVien) throws SQLException {
         Statement statement = objConn.createStatement();
-        String s1 = "Insert into NhanVien(anh, hoTen,gioiTinh,soDT,diaChi,anhPhoToCC,anhXNKcoTATS,email,passwords,token,ngayBD,ngaySinh) values (" +
+         String s1 = "Insert into NhanVien(anh, hoTen,gioiTinh,soDT,diaChi,anhPhoToCC,anhXNKcoTATS,email,passwords,token,ngayBD,ngaySinh) values (" +
                 "'" + nhanVien.getAnh() + "'," +
                 "'" + nhanVien.getHoTen() + "'," +
                 "'" + nhanVien.getGioiTinh() + "'," +
@@ -59,8 +58,8 @@ public class DAONhanVien {
         preparedStatement.setString(8, nhanVien.getEmail());
         preparedStatement.setString(9, nhanVien.getPasswords());
         preparedStatement.setString(10, nhanVien.getToken());
-        preparedStatement.setDate(11, nhanVien.getNgayBD());
-        preparedStatement.setDate(12, nhanVien.getNgaySinh());
+        preparedStatement.setDate(11,  nhanVien.getNgayBD());
+        preparedStatement.setDate(12,  nhanVien.getNgaySinh());
         preparedStatement.setInt(13, nhanVien.getMaNv());
         if (preparedStatement.executeUpdate() > 0) {
             preparedStatement.close();
@@ -81,8 +80,8 @@ public class DAONhanVien {
 
     public List<NhanVien> getListNhanVien() throws SQLException {
         List<NhanVien> list = new ArrayList<>();
-
-        if (objConn != null) {
+ 
+        if (objConn!=null){
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
             String sql = " SELECT * FROM  NhanVien";
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
@@ -94,20 +93,19 @@ public class DAONhanVien {
             return list;
         }
 
-
+ 
         return null;
     }
-
-    public NhanVien getListNhanVien(int maNV) throws SQLException {
+    public  NhanVien  getListNhanVien(int maNV) throws SQLException {
         NhanVien list = new NhanVien();
 
-        if (objConn != null) {
+        if (objConn!=null){
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT * FROM  NhanVien";
+            String sql = " SELECT * FROM  NhanVien where maNV='" + maNV + "'";
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                list = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+                list=new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
                 statement.close();// Đóng kết nối
                 return list;
             }
@@ -117,33 +115,47 @@ public class DAONhanVien {
 
         return null;
     }
-
-    public NhanVien checkLogin(String email, String password) throws SQLException {
-        NhanVien nhanVien = null;
-        if (objConn != null) {
-            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT * FROM  NhanVien where CONVERT(NVARCHAR(MAX), email)=N'" + email + "' and CONVERT(NVARCHAR(MAX), passwords)=N'" + password + "'";
-            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                nhanVien = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
-            }
-            statement.close();// Đóng kết nối
-            return nhanVien;
-        }
+    public NhanVien checkLogin(String email,String password) throws SQLException {
+        NhanVien nhanVien=null;
+       if(objConn!=null){
+           Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+           String sql = " SELECT * FROM  NhanVien where CONVERT(NVARCHAR(MAX), email)=N'"+email+"' and CONVERT(NVARCHAR(MAX), passwords)=N'"+password+"'";
+           // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+           ResultSet rs = statement.executeQuery(sql);
+           while (rs.next()) {
+               nhanVien=new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+           }
+           statement.close();// Đóng kết nối
+       return nhanVien;
+       }
         return null;
     }
 
-//    // Thêm tạm thời
-    public NhanVien getIdNhanvien(int id) throws SQLException {
-        NhanVien nhanVien = null;
-        Statement statement = objConn.createStatement();
-
-        String sql = "SELECT * FROM NhanVien WHERE maNv='" + id + "' ";
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
-            nhanVien = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+    public boolean checkLoginAdmin(String email, String password) throws SQLException {
+        if (objConn != null) {
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = " SELECT * FROM  admin where CONVERT(NVARCHAR(MAX), email)=N'" + email + "' and CONVERT(NVARCHAR(MAX), password)=N'" + password + "'";
+            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+            ResultSet rs = statement.executeQuery(sql);
+            Boolean aBoolean=false;
+            while (rs.next()) {
+                aBoolean=true;
+             }
+            statement.close();// Đóng kết nối
+            return aBoolean;
         }
-        return nhanVien;
+        return false;
+    }
+
+    public boolean updateAdmin(String email, String token) throws SQLException {
+        String sql = "UPDATE admin  SET " + "token = ? " + " WHERE CONVERT(NVARCHAR(MAX), email)=N'"+email+"';";
+        PreparedStatement preparedStatement = objConn.prepareStatement(sql);
+         preparedStatement.setString(1, token);
+
+        if (preparedStatement.executeUpdate() > 0) {
+            preparedStatement.close();
+            return true;
+        }
+        return false;
     }
 }

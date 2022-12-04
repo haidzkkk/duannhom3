@@ -46,38 +46,33 @@ public class FragmentLich extends Fragment {
         DAOChamCong daoChamCong = GiaoDienChinh.daoChamCong;
         try {
             Bundle bundle = getArguments();
-             NhanVien nhanVien = (NhanVien) bundle.getSerializable("nv");
-            list0 = daoChamCong.getListChamCong(nhanVien.getMaNv(), 0);
-            list1 = daoChamCong.getListChamCong(nhanVien.getMaNv(), 1);
-            list2 = daoChamCong.getListChamCong(nhanVien.getMaNv(), 2);
+            int nhanVien = bundle.getInt("nv");
+            list0 = daoChamCong.getListChamCong(nhanVien, 0);
+            list1 = daoChamCong.getListChamCong(nhanVien, 1);
+            list2 = daoChamCong.getListChamCong(nhanVien, 2);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //                calendarView.setCurrentDate(FormatDay.calendarDay());
 //            }
-            if (list0 != null) {
+            if (list0 != null || list0.size() == 0) {
                 calendarView.addDecorator(new DayViewDecoratorUnconfirmed(list0));
 
             }
-            if (list1 != null) {
+            if (list1 != null || list1.size() == 0) {
                 calendarView.addDecorator(new DayViewDecoratorConfirmed(list1));
 
             }
-            if (list2 != null) {
-
+            if (list2 != null || list2.size() == 0) {
                 calendarView.addDecorator(new DayViewDecoratorNoConfirm(list2));
             }
+            CalendarDay date=FormatDay.calendarDay();
+            txtChuaXN.setText(getTrangThaiCongTrongThang(list0, date.getMonth()) + "");
+            txtLam.setText(getTrangThaiCongTrongThang(list1, date.getMonth()) + "");
+            txtNghi.setText(getTrangThaiCongTrongThang(list2, date.getMonth()) + "");
 
-
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                calendarView.setCurrentDate(FormatDay.calendarDay());
-//
-//            }
-            txtChuaXN.setText(list0.size() + "");
-            txtLam.setText(list1.size() + "");
-            txtNghi.setText(list2.size()+ "");
-            calendarView.setOnMonthChangedListener((widget, date) -> {
-                txtChuaXN.setText(getTrangThaiCongTrongThang(list0, date.getMonth()) + "");
-                txtLam.setText(getTrangThaiCongTrongThang(list1, date.getMonth()) + "");
-                txtNghi.setText(getTrangThaiCongTrongThang(list2, date.getMonth()) + "");
+            calendarView.setOnMonthChangedListener((widget, date1) -> {
+                txtChuaXN.setText(getTrangThaiCongTrongThang(list0, date1.getMonth()) + "");
+                txtLam.setText(getTrangThaiCongTrongThang(list1, date1.getMonth()) + "");
+                txtNghi.setText(getTrangThaiCongTrongThang(list2, date1.getMonth()) + "");
             });
         } catch (SQLException e) {
             e.printStackTrace();

@@ -49,7 +49,7 @@ public class HoadonDateAdapter extends RecyclerView.Adapter<HoadonDateAdapter.vi
         DAONhanVien daoNhanVien = new DAONhanVien();
         NhanVien nhanVien = null;
         try {
-            nhanVien = (NhanVien) daoNhanVien.getIdNhanvien(hd.getMaNV());
+            nhanVien = (NhanVien) daoNhanVien.getListNhanVien(hd.getMaNV());
         } catch (SQLException e) {
             e.printStackTrace();
         }

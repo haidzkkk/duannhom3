@@ -1,11 +1,19 @@
 package laptrinhandroid.fpoly.dnnhm3.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,29 +39,51 @@ public class ThongBao extends AppCompatActivity {
         setContentView(R.layout.activity_thong_bao);
         recyclerView = findViewById(R.id.rcy);
         Intent intent = getIntent();
-        NhanVien mNV = (NhanVien) intent.getSerializableExtra("NV");
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        setToolBar();
+        int mNV = intent.getIntExtra("nv", 0);
         try {
-            if (mNV != null) {
-                List<ThongBaoNV> thongBaoNVS = thongBaoNVDAO.getListNotiNhanVien(mNV.getMaNv());
-                AdapterThongBaoFromNhanVien adapterThongBao = new AdapterThongBaoFromNhanVien(mNV);
-                recyclerView.setAdapter(adapterThongBao);
-                if (thongBaoNVS != null) {
+            if (mNV != 0) {
+                List<ThongBaoNV> thongBaoNVS = thongBaoNVDAO.getListNotiNhanVien(mNV);
+                AdapterThongBaoFromNhanVien adapterThongBao = new AdapterThongBaoFromNhanVien(GiaoDienChinh.nhanVien1.getListNhanVien(mNV));
+                recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+                DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+                recyclerView.addItemDecoration(itemDecoration);    if (thongBaoNVS != null) {
                     adapterThongBao.setData(thongBaoNVS);
                 }
+                recyclerView.setAdapter(adapterThongBao);
             } else {
                 List<ThongBaoAdmin> listThongBaoAdmin = thongBaoAdminDAO.getListThongBaoAdmin();
-                AdapterThongBaoFromAdmin adapterThongBaoFromAdmin = new AdapterThongBaoFromAdmin(mNV,this);
-
-                recyclerView.setAdapter(adapterThongBaoFromAdmin);
-
-                if (listThongBaoAdmin != null) {
+                AdapterThongBaoFromAdmin adapterThongBaoFromAdmin = new AdapterThongBaoFromAdmin(this);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+                DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+                recyclerView.addItemDecoration(itemDecoration); if (listThongBaoAdmin != null) {
                     adapterThongBaoFromAdmin.setData(listThongBaoAdmin);
                 }
+                recyclerView.setAdapter(adapterThongBaoFromAdmin);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            Log.d("xxxxxxxxxx", "onCreate: " + e.getMessage());
         }
 
+    } @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
+    @SuppressLint("RestrictedApi")
+    public void setToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);//set icon tren toolbar
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);//set icon menu
     }
 }

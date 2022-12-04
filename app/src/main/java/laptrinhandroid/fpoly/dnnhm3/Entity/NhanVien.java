@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 public class NhanVien implements Serializable {
     private   int maNv;
-    private  String anh, hoTen, gioiTinh, soDT, diaChi, anhPhoToCC, anhXNKcoTATS, email, passwords, token;
+    private  String anh, hoTen, gioiTinh, soDT, diaChi,  email,anhPhoToCC, anhXNKcoTATS, passwords, token;
     private Date ngayBD, ngaySinh;
 
     public NhanVien() {

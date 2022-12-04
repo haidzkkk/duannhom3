@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChiTietNhanVien">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#8ED87C"
+        app:menu="@menu/menu1"
+        app:title="Thêm nhân viên"
+        app:titleTextColor="@color/white" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Ảnh đại diện"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSelectImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/a"
+                    android:layout_alignParentRight="true"
+                    android:text="Chỉnh sửa"
+                    android:textColor="@color/teal_700" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtSelectImg"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="75dp">
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@color/black" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Ảnh CCCD"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSelectCCCD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/b"
+                    android:layout_alignParentRight="true"
+                    android:text="Chỉnh sửa"
+                    android:textColor="@color/teal_700" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtSelectCCCD"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="18dp">
+
+                    <ImageView
+                        android:id="@+id/imgCCCD"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/cccd" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Ảnh XN không có TATS"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSelectTATS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/c"
+                    android:layout_alignParentRight="true"
+                    android:text="Chỉnh sửa"
+                    android:textColor="@color/teal_700" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtSelectTATS"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="18dp">
+
+                    <ImageView
+                        android:id="@+id/imgTATS"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ktats" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/as"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="Chi tiết"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/hoTen"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+
+                         app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Họ tên" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/songTai"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+
+                        app:startIconDrawable="@drawable/ic_baseline_place_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Sống tại" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sdt"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+
+                        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Số điện thoại"
+                            android:inputType="phone" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/email"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/ic_baseline_email_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Email"
+                            android:inputType="textEmailAddress" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/gioiTinh"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/ic_baseline_psychology_alt_24"
+                        app:startIconTint="#8ED87C">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/gt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Giới tính" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ngaySinh"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/ic_baseline_cake_24"
+
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+                        app:endIconTint="#8ED87C"
+                        app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
+                        app:endIconMode="custom"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:enabled="false"
+                            android:textColor="@color/black"
+
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Ngày sinh(yyyy-MM-dd)"
+                            android:inputType="date" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ngayBD"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:endIconTint="#8ED87C"
+                        app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
+                        app:endIconMode="custom"
+                        android:layout_marginTop="15dp"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/ic_baseline_event_available_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:enabled="false"
+android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Ngày bắt đầu(yyyy-MM-dd)"
+                            android:inputType="date" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/matKhau"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+
+                        app:endIconMode="password_toggle"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/ic_baseline_key_24"
+                        app:startIconTint="#8ED87C">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_border"
+                            android:hint="Mật khẩu"
+
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>
