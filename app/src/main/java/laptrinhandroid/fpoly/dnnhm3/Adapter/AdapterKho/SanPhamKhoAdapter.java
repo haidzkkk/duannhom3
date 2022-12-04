@@ -33,7 +33,7 @@ public class SanPhamKhoAdapter extends RecyclerView.Adapter<SanPhamKhoAdapter.Sa
     public SanPhamKhoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View viewItem = inflater.inflate(R.layout.custom_sanphamkho, parent, false);
-        SanPhamKhoAdapter.SanPhamKhoViewHolder sanPhamKhoViewHolder = new SanPhamKhoAdapter.SanPhamKhoViewHolder(viewItem);
+        SanPhamKhoViewHolder sanPhamKhoViewHolder = new SanPhamKhoViewHolder(viewItem);
         viewAlert = parent;
         return sanPhamKhoViewHolder;
     }
@@ -43,8 +43,14 @@ public class SanPhamKhoAdapter extends RecyclerView.Adapter<SanPhamKhoAdapter.Sa
         daoSanPham = new DAOSanPham();
         SanPham sanPham = arrSP.get(position);
         if(sanPham != null) {
-            holder.img_SP.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()));
+            try {
+                holder.img_SP.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()));
+
+            }catch (Exception e){
+
+            }
             holder.tv_tenSP.setText(sanPham.getTenSP()+"");
+
             holder.tv_soluongton.setText("Tồn kho: "+sanPham.getSoLuong()+"");
             holder.tv_maSP.setText("SP"+sanPham.getMaSP());
             holder.tv_tongtienton.setText(String.format("%.0f", sanPham.getGiaNhap())  + " đ");
@@ -66,8 +72,8 @@ public class SanPhamKhoAdapter extends RecyclerView.Adapter<SanPhamKhoAdapter.Sa
             super(itemView);
             img_SP=itemView.findViewById(R.id.img_SPkho);
             tv_tenSP = itemView.findViewById(R.id.tv_name_SP);
-            tv_maSP = itemView.findViewById(R.id.tv_soluongtonSP);
-            tv_soluongton = itemView.findViewById(R.id.tv_maSP);
+            tv_maSP = itemView.findViewById(R.id.tv_maSP);
+            tv_soluongton = itemView.findViewById(R.id.tv_soluongtonSP);
             tv_tongtienton= itemView.findViewById(R.id.tv_tongtienSP);
         }
     }

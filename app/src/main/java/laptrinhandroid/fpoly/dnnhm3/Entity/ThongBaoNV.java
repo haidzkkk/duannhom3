@@ -21,6 +21,9 @@ public class ThongBaoNV {
         this.doc = doc;
     }
 
+    public ThongBaoNV() {
+    }
+
     public ThongBaoNV(int id, int maNV, String ngay, String message, String trangThai, Boolean doc) {
         this.id = id;
         this.maNV = maNV;

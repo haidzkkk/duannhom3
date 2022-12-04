@@ -23,6 +23,7 @@
             android:layout_width="110dp"
             android:layout_height="18dp"
             android:layout_marginLeft="17dp"
+            android:layout_marginTop="5dp"
             android:gravity="top"
             android:text="3 san pham" />
 
@@ -32,15 +33,16 @@
             android:layout_height="18dp"
             android:layout_marginLeft="320dp"
             android:gravity="top"
+            android:layout_marginTop="5dp"
             android:text="Báo cáo" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rectangle_2"
-            android:layout_width="180dp"
+            android:layout_width="175dp"
             android:layout_height="63dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="17dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="35dp"
             android:backgroundTint="#F5F5F5"
             app:cardCornerRadius="10dp">
@@ -71,11 +73,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rectangle_3"
-            android:layout_width="180dp"
+            android:layout_width="175dp"
             android:layout_height="63dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="210dp"
+            android:layout_marginLeft="207dp"
             android:layout_marginTop="35dp"
             android:backgroundTint="#F5F5F5"
             app:cardCornerRadius="10dp" >
@@ -91,7 +93,7 @@
                 android:gravity="top"
                 />
             <TextView
-                android:id="@+id/some_id2"
+                android:id="@+id/tv_tongSoLuong"
                 android:layout_width="78dp"
                 android:layout_height="18dp"
                 android:layout_alignParentLeft="true"

@@ -1,6 +1,7 @@
 package laptrinhandroid.fpoly.dnnhm3.Fragment.Kho;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +19,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterHoaDon.HoaDonNhapAdapter;
+import laptrinhandroid.fpoly.dnnhm3.Activity.ChoseProducts;
+import laptrinhandroid.fpoly.dnnhm3.Activity.QuanLyKho;
+import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho.HoaDonNhapAdapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOHoaDonNhap;
 import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonNhapKho;
+import laptrinhandroid.fpoly.dnnhm3.Interface.InforSearch;
 import laptrinhandroid.fpoly.dnnhm3.R;
 
-public class TabListBill_QLKho_Fragment extends Fragment {
+public class TabListBill_QLKho_Fragment extends Fragment implements InforSearch {
     LayoutInflater inflater;
     FloatingActionButton floatingActionButton;
     Context mContext;
@@ -32,6 +36,7 @@ public class TabListBill_QLKho_Fragment extends Fragment {
     RecyclerView rcyPm;
     DAOHoaDonNhap daoHoaDonNhap;
     HoaDonNhapAdapter adapter;
+    QuanLyKho quanLyKho;
 
     @Nullable
     @Override
@@ -47,9 +52,17 @@ public class TabListBill_QLKho_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull  View view, @Nullable  Bundle savedInstanceState) {
         inflater = getLayoutInflater();
+        floatingActionButton=view.findViewById(R.id.floatbtn_addbill);
         rcyPm= view.findViewById(R.id.recyclerview_lsBill);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         rcyPm.setLayoutManager(layoutManager);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ChoseProducts.class));
+            }
+        });
+
 
         daoHoaDonNhap = new DAOHoaDonNhap();
 
@@ -59,10 +72,27 @@ public class TabListBill_QLKho_Fragment extends Fragment {
             e.printStackTrace();
             Log.d("loiii", "onViewCreated: "+e.getMessage());
         }
-        adapter = new HoaDonNhapAdapter(mContext, arrHDN);
+        adapter = new HoaDonNhapAdapter((QuanLyKho) mContext, arrHDN);
         rcyPm.setAdapter(adapter);
 
         Log.e("ListSuze", arrHDN.size() + "");
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        arrHDN.clear();
+        try {
+            arrHDN.addAll(daoHoaDonNhap.getListHoaDonNhap());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void InforSearch(String s) {
+        adapter.getFilter().filter(s);
     }
 }

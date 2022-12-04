@@ -29,8 +29,6 @@ public class ThongBaoAdminDAO {
             preparedStatement.setInt(1,thongBaoFromAdmin.getMaNV());
             preparedStatement.setString(2,thongBaoFromAdmin.getNgay());
             preparedStatement.setBoolean(3,thongBaoFromAdmin.getDoc());
-
-
             if (preparedStatement.executeUpdate() > 0) {
                 preparedStatement.close();
                 return true;
@@ -67,6 +65,19 @@ public class ThongBaoAdminDAO {
             }
         }
         return false;
+    }
+    public int getCountThongBaoAdmin() throws SQLException {
+        if (objConn!=null){
+            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+            String sql = " SELECT count(*) FROM  ThongBaoAdmin where doc=0";
+            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+            ResultSet rs = statement.executeQuery(sql);
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+            statement.close();// Đóng kết nối
+        }
+        return 0;
     }
     public List<ThongBaoAdmin> getListThongBaoAdmin() throws SQLException {
         List<ThongBaoAdmin> list = new ArrayList<>();

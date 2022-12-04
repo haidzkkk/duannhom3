@@ -17,24 +17,25 @@ import laptrinhandroid.fpoly.dnnhm3.Fragment.NhanVien.FragmentLich;
 import laptrinhandroid.fpoly.dnnhm3.Fragment.NhanVien.FragmentLuong;
 
 public class AdapterPagerNhanVien extends FragmentStateAdapter {
-    private NhanVien nhanVien;
-     public AdapterPagerNhanVien(@NonNull FragmentActivity fragmentActivity, NhanVien nhanVien) {
+    private int nhanVien;
+
+    public AdapterPagerNhanVien(@NonNull FragmentActivity fragmentActivity, int nhanVien) {
         super(fragmentActivity);
-         Log.d("ssssssssssw", "AdapterPagerNhanVien: "+nhanVien);
+        Log.d("ssssssssssw", "AdapterPagerNhanVien: " + nhanVien);
         this.nhanVien = nhanVien;
-     }
+    }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("nv",nhanVien);
+        bundle.putInt("nv", nhanVien);
         if (position == 0) {
             FragmentLich fragmentLich = new FragmentLich();
             fragmentLich.setArguments(bundle);
             return fragmentLich;
         }
-         FragmentLuong fragmentLuong = new FragmentLuong();
+        FragmentLuong fragmentLuong = new FragmentLuong();
         fragmentLuong.setArguments(bundle);
         return fragmentLuong;
     }

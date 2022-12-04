@@ -54,9 +54,9 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
             return;
         }
         holder.tv_tenLoai.setText(""+loaiSP.getTenLoai());
-        holder.img_delete.setOnClickListener(v -> {
-            dialogDelete(loaiSP);
-        });
+//        holder.img_delete.setOnClickListener(v -> {
+//            dialogDelete(loaiSP);
+//        });
 
 
     }
@@ -100,7 +100,7 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
         public userViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_tenLoai = itemView.findViewById(R.id.txt_tendanhmuc);
-            img_delete = itemView.findViewById(R.id.imv_deleteDM);
+             img_delete = itemView.findViewById(R.id.imv_deleteDM);
         }
     }
 }

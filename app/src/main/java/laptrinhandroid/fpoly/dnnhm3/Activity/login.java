@@ -25,7 +25,9 @@ import java.sql.SQLException;
 
 import laptrinhandroid.fpoly.dnnhm3.ConvertImg;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAONhanVien;
+import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
+import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.R;
 import laptrinhandroid.fpoly.dnnhm3.notification.FcmNotificationsSender;
 
@@ -37,69 +39,73 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button btnLogin = findViewById(R.id.btnLogin);
         EditText inputEmail = findViewById(R.id.inputEmail);
-        inputEmail.setText("haidzkkk.gamil.com");
         EditText inputPassword = findViewById(R.id.inputPassword);
-        inputPassword.setText("thanhhai");
-//        try {
-//            Log.d("sssw", "onCreate: "+GiaoDienChinh.nhanVien1.getListNhanVien().get(0));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
         inputEmail.setText("haidzkkk.gamil.com");
         inputPassword.setText("thanhhai");
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setTitle("Vui lòng chờ ...");
+        FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
         btnLogin.setOnClickListener(view -> {
             progressDialog.show();
             if (!TextUtils.isEmpty(inputEmail.getText().toString()) && !TextUtils.isEmpty(inputPassword.getText().toString())) {
                 try {
                     NhanVien nhanVien = new DAONhanVien().checkLogin(inputEmail.getText().toString(), inputPassword.getText().toString());
-
-                    if (nhanVien != null) {
-                        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-                            @Override
-                            public void onComplete(@NonNull Task<String> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("ssssd", "onComplete: "+task.getResult());
-                                    nhanVien.setToken(task.getResult());
-                                     try {
-                                        if (new DAONhanVien().updateNhanVien(nhanVien)) {
+                    Boolean admin = new DAONhanVien().checkLoginAdmin(inputEmail.getText().toString(), inputPassword.getText().toString());
+                    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                        @Override
+                        public void onComplete(@NonNull Task<String> task) {
+                            if (task.isSuccessful()) {
+                                if (admin) {
+                                    try {
+                                        if (new DAONhanVien().updateAdmin(inputEmail.getText().toString(), task.getResult())) {
                                             Intent intent = new Intent(login.this, GiaoDienChinh.class);
-                                            intent.putExtra("NV", nhanVien);
-                                            startActivity(intent);
-
                                             // lưu dữ liệu tý
                                             SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putString("gmail", inputEmail.getText().toString());
                                             editor.putString("pass", inputPassword.getText().toString());
                                             editor.commit();
+                                            startActivity(intent);
                                         }
                                     } catch (SQLException e) {
                                         e.printStackTrace();
-                                        Log.d("sssij", "onComplete: "+e.getMessage());
+                                        Log.d("sssssss", "onComplete:1" + e.getMessage());
+                                    }
+                                } else {
+                                    if (nhanVien != null) {
+                                        nhanVien.setToken(task.getResult());
+                                        try {
+                                            if (new DAONhanVien().updateNhanVien(nhanVien)) {
+                                                Intent intent = new Intent(login.this, GiaoDienChinh.class);
+                                                intent.putExtra("NV", nhanVien.getMaNv());
+                                                // lưu dữ liệu tý
+                                                SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("gmail", inputEmail.getText().toString());
+                                                editor.putString("pass", inputPassword.getText().toString());
+                                                editor.commit();
+                                                startActivity(intent);
+                                            }
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        Toast.makeText(login.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
-                        });
-
-                    } else {
-                        progressDialog.dismiss();
-                        Toast.makeText(login.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
-
-
-                    }
+                        }
+                    });
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    Log.d("fgggg", "onClick: " + e.toString());
-                    Toast.makeText(login.this, e.toString() + "", Toast.LENGTH_SHORT).show();
                 }
-
             }
-
         });
     }
 }

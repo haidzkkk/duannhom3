@@ -7,239 +7,245 @@
 
 
     <Spinner
+        android:id="@+id/spn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spn"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp" />
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
+        android:id="@+id/mRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/vien"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
 
-            <RelativeLayout
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/hoi">
+                android:layout_height="match_parent"
+                android:background="@drawable/vien"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_below="@+id/hoi">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="Số giờ đã làm:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/b"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="15dp"
-                            android:text="Số công đã làm:"
+                            android:text="Số giờ đã làm:"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/b"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:text="Số công đã làm:"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/c"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_toRightOf="@+id/b"
+                                android:text="+Ngày thường:"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/b"
+                                android:layout_alignLeft="@id/c"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:text="+Chủ nhật:"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </RelativeLayout>
+
+
                         <TextView
-                            android:id="@+id/c"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="15dp"
-                            android:layout_toRightOf="@+id/b"
-                            android:text="+Ngày thường:"
+                            android:text="Lương cơ bản:"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/b"
-                            android:layout_alignLeft="@id/c"
+                            android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="15dp"
-                            android:text="+Chủ nhật:"
+                            android:text="Ứng lương:"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
-                    </RelativeLayout>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="Số tiền thưởng:"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
 
-                    <TextView
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/a"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="Lương cơ bản:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:layout_alignParentRight="true"
+                        android:gravity="right"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="Ứng lương:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/txtSoGio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="Số tiền thưởng:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                            android:layout_marginEnd="15dp"
+                            android:text="0 giờ"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/txtNgayThuong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="0 ca"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
 
-                <LinearLayout
-                    android:id="@+id/a"
+
+                        <TextView
+                            android:id="@+id/txtChuNhat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="0 ₫"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/txtLuongCb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="0 ₫"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/txtUngLuong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="0 ₫"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/txtSoTienThuong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="0 ₫"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/black" />
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/txtSoGio"
-
-                        android:layout_marginEnd="15dp"
-                        android:text="0 giờ"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:text="0 ca"
-                        android:id="@+id/txtNgayThuong"
+                        android:text="Tổng thu nhập:"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
-
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtTong"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
                         android:text="0 ₫"
-                        android:id="@+id/txtChuNhat"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="0 ₫"
-                        android:id="@+id/txtLuongCb"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="0 ₫"
-                        android:id="@+id/txtUngLuong"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:text="0 ₫"
-                        android:id="@+id/txtSoTienThuong"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/black" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="Tổng thu nhập:"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="0 ₫"
-                    android:id="@+id/txtTong"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"
-                    android:textStyle="italic" />
-            </RelativeLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+                        android:textSize="25sp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </LinearLayout>

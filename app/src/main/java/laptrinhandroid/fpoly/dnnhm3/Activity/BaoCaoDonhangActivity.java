@@ -4,35 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho.SanPhamKhoAdapter;
-import laptrinhandroid.fpoly.dnnhm3.Adapter.Adapter_baocao.BaocaoAdapterLich;
 import laptrinhandroid.fpoly.dnnhm3.Adapter.Adapter_baocao.HoadonDateAdapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOBaoCao;
 import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;

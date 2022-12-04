@@ -71,10 +71,11 @@ public class SanPhamActivity extends AppCompatActivity implements addsp {
     }
  
     @Override
-    public void addSP(SanPham sanPham) {
+    public boolean addSP(SanPham sanPham) {
        if(new DAOSanPham(). addSanPham( sanPham)){
-           Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+            return true;
        }
+        return false;
     }
  
 }

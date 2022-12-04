@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:id="@+id/item_spChon_frag"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/img_SPChose"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/these53brandproductswereredoneinmonochromeandtheylooksurreal" />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name_SPChose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Banh my Viet Nam"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_maSPChose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="SP001"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:text="|" />
+
+                    <TextView
+                        android:id="@+id/tv_SLTonChose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Còn: 12"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="90dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/item_btn_number"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_sub"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="#E91E47"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tv_soluongNhap"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_add"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#489C4C"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

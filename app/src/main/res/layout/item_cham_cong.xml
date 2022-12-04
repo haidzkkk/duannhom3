@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:padding="15dp">
+
+
+    <RelativeLayout
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ngay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="13dp"
+            android:text="Ngày 2003-9-20"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/show"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+             android:padding="5dp"
+               android:button="@drawable/chua_xn"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/mLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/macong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã công:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/gioBatDau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giờ bắt đầu:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/gioKetThuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giờ kết thúc:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/a0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/rdiChuaXN"
+                android:layout_marginBottom="13dp"
+                android:text="Trạng thái:"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rdiChuaXN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/a0"
+                    android:buttonTint="#FFE500"
+                    android:text="Chưa xác nhận" />
+
+
+
+                <RadioButton
+                    android:id="@+id/rdiXN"
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/rdiChuaXN"
+                    android:buttonTint="#00FF0A"
+                    android:text="Xác nhận" /><RadioButton
+                android:id="@+id/rdiKhongXN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rdiChuaXN"
+                android:layout_alignLeft="@id/rdiChuaXN"
+
+                android:buttonTint="#FF1100"
+                android:text="Không xác nhận" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

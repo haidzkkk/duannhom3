@@ -52,9 +52,10 @@ public class FragmentSanPham extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sanpham, container, false);
-//        daoLoaiSanPham = new DAOLoaiSanPham();
-//        daoSanPham = GiaoDienChinh.sanPhamq;
-        recyclerView = view.findViewById(R.id.rcv_sanpham);
+ 
+        daoLoaiSanPham = new DAOLoaiSanPham();
+        daoSanPham = new DAOSanPham();
+         recyclerView = view.findViewById(R.id.rcv_sanpham);
          floatingActionButton = view.findViewById(R.id.flbtn_sanpham);
         try {
             list = (ArrayList<SanPham>) daoSanPham.getListSanPham();
@@ -125,14 +126,12 @@ public class FragmentSanPham extends Fragment {
         btn_huy.setOnClickListener(v1 -> {
             alertDialog.cancel();
         });
-
-
     }
 
     public void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
-
-
+ 
     }
-}
+
+ }

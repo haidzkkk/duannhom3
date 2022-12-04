@@ -26,13 +26,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Activity.SanPhamActivity;
-import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho.SanPhamKhoAdapter;
 import laptrinhandroid.fpoly.dnnhm3.ConvertImg;
-import laptrinhandroid.fpoly.dnnhm3.DAO.DAOHoaDonNhap;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOLoaiSanPham;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
-import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonNhapKho;
 import laptrinhandroid.fpoly.dnnhm3.Entity.LoaiSP;
 import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.R;
@@ -52,17 +48,13 @@ public class SanPhamadapter extends RecyclerView.Adapter<SanPhamadapter.SanPhamV
     @NonNull
     @Override
     public SanPhamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View viewItem = inflater.inflate(R.layout.item_sanpham, parent, false);
-        SanPhamadapter.SanPhamViewHolder sanPhamViewHolder = new SanPhamadapter.SanPhamViewHolder(viewItem);
-        viewAlert = parent;
-        return sanPhamViewHolder;
+
+        return new SanPhamViewHolder(  LayoutInflater.from(context).inflate(R.layout.item_sanpham, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull SanPhamViewHolder holder, int position) {
-        daoSanPham = new DAOSanPham();
-        SanPham sanPham = arrSP.get(position);
+         SanPham sanPham = arrSP.get(position);
         if(sanPham != null) {
             try {
                 holder.img_SP.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()));
@@ -117,7 +109,7 @@ public class SanPhamadapter extends RecyclerView.Adapter<SanPhamadapter.SanPhamV
             sanPham=arrSP.get(position);
             String LoaiSP = (String) spn_loaiSP.getSelectedItem();
             String[] maloai = LoaiSP.split("\\.");
-            sanPham.setTenSP(ed_tenSanPham.getText().toString());
+            sanPham.setTenSP(ed_tenSanPham.getText().toString()+"");
             sanPham.setGiaNhap(Float.parseFloat(ed_giavon.getText().toString()));
             sanPham.setGiaBan(Float.parseFloat(ed_giaban.getText().toString()));
             sanPham.setLoaiSP(Integer.parseInt(maloai[0]));

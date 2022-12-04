@@ -66,15 +66,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendNotification(String stile, String body,String icon) {
         //thao tác trên notification
-        Intent intent = new Intent(this, MainActivityhoadon.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, Build.VERSION.SDK_INT < Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT : PendingIntent.FLAG_IMMUTABLE);
+//        Intent intent = new Intent(this, MainActivityhoadon.class);
+//
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, Build.VERSION.SDK_INT < Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT : PendingIntent.FLAG_IMMUTABLE);
 
         Notification.Builder builder = new Notification.Builder(this, "1")
                 .setContentTitle(stile)
                 .setContentText(body)
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.bell).setColor(getColor(R.color.green))
+                 .setSmallIcon(R.drawable.bell).setColor(getColor(R.color.green))
                 .setShowWhen(true);
         Notification notification = builder.build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

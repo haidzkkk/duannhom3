@@ -2,18 +2,17 @@ package laptrinhandroid.fpoly.dnnhm3.Fragment.Kho;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class TabListProduct_QLKho_Fragment extends Fragment {
     RecyclerView rcySP;
     DAOSanPham daoSanPham;
     SanPhamKhoAdapter adapter;
-    int giatritongSP;
+    int giatritongSP=0, soluongton=0;
 
     @Override
     public void onAttach(Context context) {
@@ -44,13 +43,18 @@ public class TabListProduct_QLKho_Fragment extends Fragment {
         rcySP= view.findViewById(R.id.recyclerview_lsProduct);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         rcySP.setLayoutManager(layoutManager);
-        TextView tv_tongSP,tv_giatriton;
+        TextView tv_tongSP,tv_giatriton,tv_soLuongton;
         tv_tongSP=view.findViewById(R.id.txt_tongSPton);
         tv_giatriton=view.findViewById(R.id.tv_giatriton);
+        tv_soLuongton=view.findViewById(R.id.tv_tongSoLuong);
         daoSanPham = new DAOSanPham();
         try {
             arrSP = (ArrayList<SanPham>) daoSanPham.getListSanPham();
-            giatritongSP= daoSanPham.getTongTienSanPham();
+            for (SanPham sanPham:arrSP) {
+                giatritongSP+=(sanPham.getSoLuong() * sanPham.getGiaNhap());
+                soluongton+=sanPham.getSoLuong();
+            }
+//            giatritongSP= daoSanPham.getTongTienSanPham();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,6 +64,7 @@ public class TabListProduct_QLKho_Fragment extends Fragment {
         rcySP.setAdapter(adapter);
         tv_tongSP.setText(arrSP.size()+" sản phẩm");
         tv_giatriton.setText(giatritongSP+" đ");
+        tv_soLuongton.setText(soluongton+"");
         Log.e("ListSuze", arrSP.size() + "");
         Log.e("giatritong", giatritongSP + "");
 

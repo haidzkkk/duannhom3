@@ -1,11 +1,24 @@
 package laptrinhandroid.fpoly.dnnhm3.Entity;
 
-public class ChiTietHoaDonNhap {
+import java.io.Serializable;
+
+public class ChiTietHoaDonNhap implements Serializable {
     private int id,maHD, maSp;
     private String anh,tenSP;
     private int soLuong;
     private float donGia;
      private float thanhTien;
+
+    public ChiTietHoaDonNhap(int id, int maHD, int maSp, String anh, String tenSP, int soLuong, float donGia, float thanhTien) {
+        this.id = id;
+        this.maHD = maHD;
+        this.maSp = maSp;
+        this.anh = anh;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
+    }
 
     public String getAnh() {
         return anh;

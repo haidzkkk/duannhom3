@@ -32,7 +32,7 @@ public class DayViewDecoratorUnconfirmed implements com.prolificinteractive.mate
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5, Color.parseColor("#F44336")));
+        view.addSpan(new DotSpan(5, Color.parseColor("#FF9800")));
 
     }
 
