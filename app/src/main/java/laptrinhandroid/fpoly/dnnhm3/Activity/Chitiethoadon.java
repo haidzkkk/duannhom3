@@ -101,7 +101,7 @@ public class Chitiethoadon extends AppCompatActivity {
             listchitiethoadon = daochitiethoadon.getAllchitiethoadon();
             hoaDonBanList = daOhoadon.getAllhoadon();
             listkh = daokhachhang.getAllkhachang();
-            listsp = daoSanPham.getAllsanpham();
+            listsp = daoSanPham.getListSanPham();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class Chitiethoadon extends AppCompatActivity {
         listnv = new ArrayList<NhanVien>();
         daoNhanVien = new DAONhanVien();
         try {
-            listnv = daoNhanVien.getAllNhanvien();
+            listnv = daoNhanVien.getListNhanVien();
         } catch (SQLException e) {
             e.printStackTrace();
         }

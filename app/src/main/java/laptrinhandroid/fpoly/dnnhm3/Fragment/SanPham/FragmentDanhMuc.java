@@ -53,56 +53,54 @@ public class FragmentDanhMuc extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
- 
-        View view= inflater.inflate(R.layout.fragment_danh_muc, container, false);
-        recyclerView= view.findViewById(R.id.rcv_danhmuc);
+
+        View view = inflater.inflate(R.layout.fragment_danh_muc, container, false);
+        recyclerView = view.findViewById(R.id.rcv_danhmuc);
         floatingActionButton = view.findViewById(R.id.flbtn_danhmuc);
         daoLoaiSanPham = new DAOLoaiSanPham();
         try {
             list = (ArrayList<LoaiSP>) daoLoaiSanPham.getListLoaiSanPham();
             adapter = new LoaiSanPhamAdapter(getActivity());
             adapter.setData(list);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setAdapter(adapter);
         } catch (SQLException e) {
             e.printStackTrace();
- 
-          floatingActionButton.setOnClickListener(new View.OnClickListener() {
-             @Override
-            public void onClick(View v) {
-                insert_danhmuc();
-            }
-        });
-        return view;
+
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    insert_danhmuc();
+                }
+            });
+
+        }  return view;
     }
- 
-    private void insert_danhmuc() {
-        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater= getLayoutInflater();
-        View view=inflater.inflate(R.layout.dialog_danhmuc,null);
-         TextInputEditText ed_tendanhmuc= view.findViewById(R.id.ed_tendanhmuc);
-        Button btn_them= view.findViewById(R.id.btn_themdanhmuc);
-        builder.setView(view);
-        Dialog dialog=builder.create();
-        dialog.show();
-        btn_them.setOnClickListener(v ->{
-            daoLoaiSanPham = new DAOLoaiSanPham();
-            LoaiSP loaiSP = new LoaiSP();
-            loaiSP.setTenLoai(ed_tendanhmuc.getText().toString());
-            if (daoLoaiSanPham.addLoaiSanPham(loaiSP)) {
-                Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-            }
-             else {
-                Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                adapter.notifyDataSetChanged();
-            }
-            dialog.cancel();
-        });
+        private void insert_danhmuc () {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_danhmuc, null);
+            TextInputEditText ed_tendanhmuc = view.findViewById(R.id.ed_tendanhmuc);
+            Button btn_them = view.findViewById(R.id.btn_themdanhmuc);
+            builder.setView(view);
+            Dialog dialog = builder.create();
+            dialog.show();
+            btn_them.setOnClickListener(v -> {
+                daoLoaiSanPham = new DAOLoaiSanPham();
+                LoaiSP loaiSP = new LoaiSP();
+                loaiSP.setTenLoai(ed_tendanhmuc.getText().toString());
+                if (daoLoaiSanPham.addLoaiSanPham(loaiSP)) {
+                    Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                }
+                dialog.cancel();
+            });
 
 
-
-    }
+        }
 
 
     public void onResume(){

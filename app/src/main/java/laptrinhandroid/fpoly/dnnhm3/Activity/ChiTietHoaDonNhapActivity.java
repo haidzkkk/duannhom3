@@ -228,11 +228,14 @@ public class ChiTietHoaDonNhapActivity extends AppCompatActivity {
         daoNhaCungCap=new DaoNhaCungCap();
         try {
             listNcc = daoNhaCungCap.getAllNhaCung();
+            if(listNcc!=null){
+                spinnerNhaCungCap = new Spinner_nhaCungCap(getApplicationContext(), listNcc);
+                spinner_ncc.setAdapter(spinnerNhaCungCap);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        spinnerNhaCungCap = new Spinner_nhaCungCap(getApplicationContext(), listNcc);
-        spinner_ncc.setAdapter(spinnerNhaCungCap);
+
         spinner_ncc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

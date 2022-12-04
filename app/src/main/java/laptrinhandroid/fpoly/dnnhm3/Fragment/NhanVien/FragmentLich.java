@@ -24,6 +24,7 @@ import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorConfirmed;
 import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorNoConfirm;
 import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorUnconfirmed;
 import laptrinhandroid.fpoly.dnnhm3.R;
+import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.FormatDay;
 
 public class FragmentLich extends Fragment {
     MaterialCalendarView calendarView;
@@ -62,7 +63,7 @@ public class FragmentLich extends Fragment {
             if (list2 != null || list2.size() == 0) {
                 calendarView.addDecorator(new DayViewDecoratorNoConfirm(list2));
             }
-            CalendarDay date=FormatDay.calendarDay();
+            CalendarDay date= FormatDay.calendarDay();
             txtChuaXN.setText(getTrangThaiCongTrongThang(list0, date.getMonth()) + "");
             txtLam.setText(getTrangThaiCongTrongThang(list1, date.getMonth()) + "");
             txtNghi.setText(getTrangThaiCongTrongThang(list2, date.getMonth()) + "");
