@@ -312,7 +312,7 @@ public class GiaoDienChinh extends AppCompatActivity implements NavigationView.O
                             }
                         } else {
                             daoChamCong.addChamCong(new ChamCong(nv.getMaNv(), new Time(System.currentTimeMillis()), null, new java.sql.Date(System.currentTimeMillis()), 0));
-                            bangLuong.addBangLuong(new BangLuong(nv.getMaNv(), 5000, 0, 0, FormatDay.calendarDay().getYear() + "-" + (FormatDay.calendarDay().getMonth() + 1)));
+                            bangLuong.addBangLuong(new BangLuong(nv.getMaNv(), 5000, 0, 0, FormatDay.calendarDay().getYear() + "-" + (FormatDay.calendarDay().getMonth())));
                             khiChamCongVaoLam(new Time(System.currentTimeMillis()));
                             btnXacNhan.setText("Chấm công kết thúc");
 
