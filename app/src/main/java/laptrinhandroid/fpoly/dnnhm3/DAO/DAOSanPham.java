@@ -1,5 +1,7 @@
 package laptrinhandroid.fpoly.dnnhm3.DAO;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -22,31 +24,33 @@ public class DAOSanPham {
     }
 
     public boolean addSanPham(SanPham sanPham) {
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
-            statement = objConn.createStatement();
-            String s1 = "Insert into SanPham(loaiSP, tenSP,giaNhap,giaBan,anh,soLuongDaBan,soLuong,ghiChu ) values (" +
-                    "'" + sanPham.getLoaiSP() + "'," +
-                    "'" + sanPham.getTenSP() + "'," +
-                    "'" + sanPham.getGiaNhap() + "'," +
-                    "'" + sanPham.getGiaBan() + "'," +
-                    "'" + sanPham.getAnh() + "'," +
-                    "'" + sanPham.getSoLuongDaBan() + "'," +
-                    "'" + sanPham.getSoLuong() + "'," +
-                    "'" + sanPham.getGhiChu() + "')";
-            if (statement.executeUpdate(s1) > 0) {
+            String s1 = "Insert into SanPham(loaiSP,tenSP,giaNhap,giaBan,anh,soLuongDaBan,soLuong,ghiChu ) values (?,?,?,?,?,?,?,?)";
+            statement = objConn.prepareStatement(s1);
+            statement.setInt(1, sanPham.getLoaiSP());
+            statement.setString(2, sanPham.getTenSP());
+            statement.setFloat(3, sanPham.getGiaNhap());
+            statement.setFloat(4, sanPham.getGiaBan());
+            statement.setString(5, "s");
+            statement.setInt(6, 0);
+            statement.setInt(7, 0);
+            statement.setString(8, "sanPham.getGhiChu()");
+            if (statement.executeUpdate() > 0) {
                 statement.close();
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            Log.d("sssss", "addSanPham: "+e.getMessage());
         }
         return false;
     }
 
 
-    public boolean updateSanPham(SanPham sanPham) {
-        String sql = "UPDATE SanPham  SET " + "loaiSP = ?," + " tenSP =?," + "giaNhap=?" + ",giaBan=?" + ",anh=?" + ",soLuongDaBan=?" + ",soLuong=?" + ",ghiChu=?" + " WHERE maSP='"+sanPham.getMaSP()+"';";
+    public boolean updateSanPham(SanPham sanPham)throws SQLException {
+        String sql = "UPDATE SanPham  SET " + "loaiSP = ?," + " tenSP =?," + "giaNhap=?" +
+                ",giaBan=?" + ",anh=?" + ",soLuongDaBan=?" + ",soLuong=?" + ",ghiChu=?" + " WHERE maSP='"+sanPham.getMaSP()+"';";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = objConn.prepareStatement(sql);
@@ -59,29 +63,31 @@ public class DAOSanPham {
             preparedStatement.setInt(7, sanPham.getSoLuong());
             preparedStatement.setString(8, sanPham.getGhiChu());
 
-            if (preparedStatement.executeUpdate(sql) > 0) {
+            if (preparedStatement.executeUpdate() > 0) {
                 preparedStatement.close();
                 return true;
             }
         } catch (SQLException e) {
+            Log.d("ddddd", "updateSanPham: "+e.
+                    getMessage());
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean deleteSanPham(int maSP) {
+    public int deleteSanPham(int maSP) {
         Statement statement = null;
         try {
             statement = objConn.createStatement();
             String sql = "Delete from SanPham where maSP='" + maSP + "'";
-            if (statement.executeUpdate(sql) > 0) {
+            if (statement.executeUpdate(sql) < 0) {
                 statement.close();
-                return true;
+                return -1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return 1;
     }
 
     public List<SanPham> getListSanPham() throws SQLException {
@@ -94,6 +100,22 @@ public class DAOSanPham {
         }
         objConn.close();
         return list;
+    }
+
+    public int getTongTienSanPham() throws SQLException {
+        List<Integer> list = new ArrayList<>();
+        Statement statement = objConn.createStatement();
+        String sql = " SELECT sum(giaNhap) FROM SanPham";
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            try {
+                list.add((int) rs.getFloat(1));
+            } catch (Exception e) {
+                Log.d("aaaa", e.toString());
+            }
+        }
+        statement.close();
+        return list.get(0);
     }
 
 }
