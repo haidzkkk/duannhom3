@@ -138,14 +138,12 @@ public class FragmentSanPham extends Fragment {
         btn_huy.setOnClickListener(v1 -> {
             alertDialog.cancel();
         });
-
-
     }
 
     public void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
 
-
+    }
 
 }
