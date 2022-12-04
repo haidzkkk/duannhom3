@@ -9,10 +9,12 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar_sanpham"
         app:menu="@menu/toolbar_sanpham"
+         android:background="@color/green"
+ 
         app:title="Sản phẩm"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        />
+         />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_sanpham"
@@ -21,7 +23,8 @@
         android:layout_height="wrap_content"/>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+  
+         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
