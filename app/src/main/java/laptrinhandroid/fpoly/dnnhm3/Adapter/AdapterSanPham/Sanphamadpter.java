@@ -160,7 +160,7 @@ public class Sanphamadpter extends RecyclerView.Adapter<Sanphamadpter.viewholder
             BTN1 = itemView.findViewById(R.id.removeBtn);
             BTN2 = itemView.findViewById(R.id.addBtn);
             editText = itemView.findViewById(R.id.itemQuanEt);
-            relativeLayout=itemView.findViewById(R.id.relaysp);
+            relativeLayout=itemView.findViewById(R.id.item_btn_number);
             cardViewsp=itemView.findViewById(R.id.carviewsp);
 
         }

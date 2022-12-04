@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+ 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.SanPham.FragmentSanPham">
 <!--    <include-->
@@ -56,13 +57,14 @@
             android:layout_marginRight="20dp"
             />
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/flbtn_sanpham"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
+ 
         android:layout_marginBottom="80dp"
         android:layout_marginRight="40dp"
-        android:src="@drawable/ic_baseline_add_24"
+         android:src="@drawable/ic_baseline_add_24"
         />
 </FrameLayout>

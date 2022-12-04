@@ -3,15 +3,14 @@ package laptrinhandroid.fpoly.dnnhm3.DAO;
 import android.util.Log;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
 import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.JDBC.DbSqlServer;
 
@@ -46,9 +45,54 @@ public class DAOSanPham {
         return false;
     }
 
+    //-----------------------------------------------
+//    public List<SanPham> getlistSP(String sql) throws SQLException {
+//        ArrayList<SanPham> list = new ArrayList<>();
+//        Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+//        // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+//        ResultSet rs = statement.executeQuery(sql);
+//        while (rs.next()) {
+//            list.add(new SanPham(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9)));// Đọc dữ liệu từ ResultSet
+//        }
+////        connection.close();// Đóng kết nối
+//        return (List<SanPham>) list.get(0);
+//    }
+//
+//    public List<SanPham> getIdSP(@NonNull SanPham sanPham) throws SQLException {
+//        String sql = "SELECT * FROM SanPham WHERE maSP = "+sanPham.getMaSP()+"";
+//        try {
+//            return getlistSP(sql);
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+    public List<SanPham> getlistSP(String sql, String...selectionArgs) throws SQLException {
+        List<SanPham> list = new ArrayList<>();
+        Statement statement = objConn.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+ while (rs.next()) {
+            list.add(new SanPham(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9)));// Đọc dữ liệu từ ResultSet
+        }
 
-    public boolean updateSanPham(SanPham sanPham) {
-        String sql = "UPDATE SanPham  SET " + "loaiSP = ?," + " tenSP =?," + "giaNhap=?" + ",giaBan=?" + ",anh=?" + ",soLuongDaBan=?" + ",soLuong=?" + ",ghiChu=?" + " WHERE maSP='"+sanPham.getMaSP()+"';";
+        return list;
+    }
+    public SanPham getIdSP(String id) {
+        String sql = "SELECT * FROM SanPham WHERE maSP="+id+"";
+        List<SanPham> listSP = null;
+        try {
+            listSP = getlistSP(sql,id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSP.get(0);
+    }
+
+
+
+    public boolean updateSanPham(SanPham sanPham)throws SQLException {
+        String sql = "UPDATE SanPham  SET " + "loaiSP = ?," + " tenSP =?," + "giaNhap=?" +
+                ",giaBan=?" + ",anh=?" + ",soLuongDaBan=?" + ",soLuong=?" + ",ghiChu=?" + " WHERE maSP='"+sanPham.getMaSP()+"';";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = objConn.prepareStatement(sql);
@@ -61,11 +105,13 @@ public class DAOSanPham {
             preparedStatement.setInt(7, sanPham.getSoLuong());
             preparedStatement.setString(8, sanPham.getGhiChu());
 
-            if (preparedStatement.executeUpdate(sql) > 0) {
+            if (preparedStatement.executeUpdate() > 0) {
                 preparedStatement.close();
                 return true;
             }
         } catch (SQLException e) {
+            Log.d("ddddd", "updateSanPham: "+e.
+                    getMessage());
             e.printStackTrace();
         }
         return false;
@@ -97,56 +143,29 @@ public class DAOSanPham {
         objConn.close();
         return list;
     }
+    //-------------------------
 
-    public int getTongTienSanPham() throws SQLException {
-        List <Integer> list = new ArrayList<>();
-        Statement statement = objConn.createStatement();
-        String sql = " SELECT sum(giaNhap) FROM SanPham";
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
-            try {
-                list.add((int) rs.getFloat(1));
-            } catch (Exception e) {
-                Log.d("aaaa",e.toString());
-            }
-        }
-        statement.close();
-        return list.get(0);
-    }
-
-    public List<SanPham> getListSanPhamBaoCao(int isStatus) {
-        String hint = null;
-        switch (isStatus){
-            case 0:{
-                hint = " ORDER BY soLuongDaBan DESC";
-                break;
-            }
-            case 1:{
-                hint = " WHERE soLuong > 0";
-                break;
-            }
-            case 2:{
-                hint = " WHERE soLuong < 0";
-                break;
-            }
-        }
-        List<SanPham> list = new ArrayList<>();
-
+    public List<SanPham> getSearchSP(String kqtk) {
+        String sql = "SELECT * FROM SanPham where tenSP like '%"+ kqtk +"%'";
+        List<SanPham> listSearch=null;
         try {
-
-            Statement statement = objConn.createStatement();
-            String sql = " SELECT * FROM  SanPham " + hint;
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                list.add(new SanPham(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9)));// Đọc dữ liệu từ ResultSet
-            }
-            objConn.close();
-
+            listSearch= getlistSP(sql,kqtk);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return list;
+        return listSearch;
     }
 
+    public List<SanPham> getAllsanpham() throws SQLException{
+        String sql = "SELECT * FROM SanPham"  ;
+        try {
+            return getlistSP(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public Collection<? extends SanPham> getListSanPhamBaoCao(int i) {
+        return null;
+    }
 }

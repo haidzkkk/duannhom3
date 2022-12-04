@@ -1,24 +1,39 @@
 package laptrinhandroid.fpoly.dnnhm3.Entity;
 
-public class ChiTietHoaDon {
+import java.io.Serializable;
+
+public class ChiTietHoaDonban implements Serializable {
     private int id, maHD, maSp;
     private String anh, tenSP;
     private int soLuong;
     private float donGia;
-    private String khuyenMai;
     private float thanhTien;
 
-    public ChiTietHoaDon() {
+    @Override
+    public String toString() {
+        return "ChiTietHoaDonban{" +
+                "id=" + id +
+                ", maHD=" + maHD +
+                ", maSp=" + maSp +
+                ", anh='" + anh + '\'' +
+                ", tenSP='" + tenSP + '\'' +
+                ", soLuong=" + soLuong +
+                ", donGia=" + donGia +
+                ", thanhTien=" + thanhTien +
+                '}';
     }
 
-    public ChiTietHoaDon(int maHD, int maSp, String anh, String tenSP, int soLuong, float donGia, String khuyenMai, float thanhTien) {
+    public ChiTietHoaDonban() {
+    }
+
+    public ChiTietHoaDonban(int id, int maHD, int maSp, String anh, String tenSP, int soLuong, float donGia, float thanhTien) {
+        this.id = id;
         this.maHD = maHD;
         this.maSp = maSp;
         this.anh = anh;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
-        this.khuyenMai = khuyenMai;
         this.thanhTien = thanhTien;
     }
 
@@ -77,14 +92,6 @@ public class ChiTietHoaDon {
 
     public void setDonGia(float donGia) {
         this.donGia = donGia;
-    }
-
-    public String getKhuyenMai() {
-        return khuyenMai;
-    }
-
-    public void setKhuyenMai(String khuyenMai) {
-        this.khuyenMai = khuyenMai;
     }
 
     public float getThanhTien() {

@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import laptrinhandroid.fpoly.dnnhm3.Activity.GiaoDienChinh;
-import laptrinhandroid.fpoly.dnnhm3.DAO.DAOBangLuong;
 import laptrinhandroid.fpoly.dnnhm3.Entity.BangLuong;
 import laptrinhandroid.fpoly.dnnhm3.Entity.ChamCong;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;

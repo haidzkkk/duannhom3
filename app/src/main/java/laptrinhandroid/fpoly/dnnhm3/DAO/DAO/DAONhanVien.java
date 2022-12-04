@@ -1,6 +1,4 @@
-package laptrinhandroid.fpoly.dnnhm3.DAO;
-
-import androidx.fragment.app.FragmentActivity;
+package laptrinhandroid.fpoly.dnnhm3.DAO.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
 import laptrinhandroid.fpoly.dnnhm3.JDBC.DbSqlServer;
 
@@ -22,6 +19,8 @@ public class DAONhanVien {
         DbSqlServer db = new DbSqlServer(); // hàm khởi tạo để mở kết nối
         objConn = db.openConnect(); // tạo mới DAO thì mở kết nối CSDL
     }
+
+    int position;
 
     public boolean addNhanVien(NhanVien nhanVien) throws SQLException {
         Statement statement = objConn.createStatement();
@@ -59,10 +58,13 @@ public class DAONhanVien {
         preparedStatement.setString(8, nhanVien.getEmail());
         preparedStatement.setString(9, nhanVien.getPasswords());
         preparedStatement.setString(10, nhanVien.getToken());
+
+
         preparedStatement.setDate(11, nhanVien.getNgayBD());
         preparedStatement.setDate(12, nhanVien.getNgaySinh());
+
         preparedStatement.setInt(13, nhanVien.getMaNv());
-        if (preparedStatement.executeUpdate() > 0) {
+        if (preparedStatement.executeUpdate(sql) > 0) {
             preparedStatement.close();
             return true;
         }
@@ -84,7 +86,6 @@ public class DAONhanVien {
 
         if (objConn != null) {
             Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
@@ -92,26 +93,6 @@ public class DAONhanVien {
             }
             statement.close();// Đóng kết nối
             return list;
-        }
-
-
-        return null;
-    }
-
-    public NhanVien getListNhanVien(int maNV) throws SQLException {
-        NhanVien list = new NhanVien();
-
-        if (objConn != null) {
-            Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
-            String sql = " SELECT * FROM  NhanVien";
-            // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                list = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
-                statement.close();// Đóng kết nối
-                return list;
-            }
-            return null;
         }
 
 
@@ -134,17 +115,16 @@ public class DAONhanVien {
         return null;
     }
 
-    //    // Thêm tạm thời
-    public NhanVien getIdNhanvien(int id) throws SQLException {
-        NhanVien nhanVien = null;
-        Statement statement = objConn.createStatement();
-
+    public NhanVien getIdNhanvien(String id) {
         String sql = "SELECT * FROM NhanVien WHERE maNv='" + id + "' ";
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
-            nhanVien = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+        List<NhanVien> listTV = new ArrayList<>();
+
+        try {
+            listTV = getListNhanVien(sql, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return nhanVien;
+        return listTV.get(0);
     }
 
     public List<NhanVien> getAllNhanvien() throws SQLException {
@@ -155,5 +135,40 @@ public class DAONhanVien {
             e.printStackTrace();
         }
         return null;
-    }
+
+//        public NhanVien getListNhanVien (int maNV) throws SQLException {
+//            NhanVien list = new NhanVien();
+//
+//            if (objConn != null) {
+//                Statement statement = objConn.createStatement();// Tạo đối tượng Statement.
+//                String sql = " SELECT * FROM  NhanVien";
+//                // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+//                ResultSet rs = statement.executeQuery(sql);
+//                while (rs.next()) {
+//                    list = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+//                    statement.close();// Đóng kết nối
+//                    return (List<NhanVien>) list;
+//                }
+//                return null;
+//            }
+//
+//
+//            return null;
+//        }
+
+
+//    // Thêm tạm thời
+//        NhanVien getIdNhanvien;(int id); throws SQLException {
+//            NhanVien nhanVien = null;
+//            Statement statement = objConn.createStatement();
+//
+//            String sql = "SELECT * FROM NhanVien WHERE maNv='" + id + "' ";
+//            ResultSet rs = statement.executeQuery(sql);
+//            while (rs.next()) {
+//                nhanVien = new NhanVien(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12), rs.getDate(13));// Đọc dữ liệu từ ResultSet
+//            }
+//            return (List<NhanVien>) nhanVien;
+//
+//        }
+  }
 }

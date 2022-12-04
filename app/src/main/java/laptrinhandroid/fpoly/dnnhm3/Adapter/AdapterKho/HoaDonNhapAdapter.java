@@ -1,4 +1,4 @@
-package laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterHoaDon;
+package laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ public class HoaDonNhapAdapter extends RecyclerView.Adapter<HoaDonNhapAdapter.Ho
     View viewAlert;
     LayoutInflater inflater;
 
-    public HoaDonNhapAdapter(Context context,  ArrayList<HoaDonNhapKho> arrHDN) {
+    public HoaDonNhapAdapter(Context context, ArrayList<HoaDonNhapKho> arrHDN) {
         this.context = context;
         this.arrHDN = arrHDN;
     }

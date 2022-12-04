@@ -1,16 +1,5 @@
 package laptrinhandroid.fpoly.dnnhm3.Activity;
 
-import androidx.annotation.NonNull;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.Dialog;
@@ -18,28 +7,31 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
-
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
 
 import java.sql.SQLException;
 import java.sql.Time;
@@ -56,8 +48,8 @@ import laptrinhandroid.fpoly.dnnhm3.DAO.DAONhanVien;
 import laptrinhandroid.fpoly.dnnhm3.DAO.ThongBaoNVDAO;
 import laptrinhandroid.fpoly.dnnhm3.Entity.ChamCong;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
-import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.FormatDay;
 import laptrinhandroid.fpoly.dnnhm3.R;
+import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.FormatDay;
 import laptrinhandroid.fpoly.dnnhm3.notification.FcmNotificationsSender;
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -145,7 +137,7 @@ public class GiaoDienChinh extends AppCompatActivity {
                 float h = (float) soH / (1000 * 60 * 60);
                 txtSoGioDaLam.setText(h + " giờ");
             }
-            txtSoTienThuongHienTai.setText(bangLuong.getBangLuong(nv.getMaNv()).getThuong() + " VND");
+//            txtSoTienThuongHienTai.setText(bangLuong.getBangLuong(nv.getMaNv()).getThuong() + " VND");
 
 
         } catch (SQLException e) {
@@ -181,7 +173,7 @@ public class GiaoDienChinh extends AppCompatActivity {
             startActivity(intent1, options.toBundle());
         });
         cuaHang.setOnClickListener(v -> {
-//            Intent intent1 = new Intent(this, MainActivity.class);
+//            Intent intent1 = new Intent(this, MainActivityhoadon.class);
 //             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, nhanVien, "a");
 //            startActivity(intent1, options.toBundle());
         });

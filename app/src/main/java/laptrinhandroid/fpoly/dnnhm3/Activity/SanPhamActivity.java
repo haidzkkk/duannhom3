@@ -15,9 +15,13 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterSanPham.ViewSanPhamAdapter;
+ import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
+import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.R;
+import laptrinhandroid.fpoly.dnnhm3.addsp;
 
-public class SanPhamActivity extends AppCompatActivity {
+public class SanPhamActivity extends AppCompatActivity implements addsp {
+ 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     Toolbar toolbar;
@@ -51,10 +55,11 @@ public class SanPhamActivity extends AppCompatActivity {
             case R.id.search:
                 Toast.makeText(getApplicationContext(),"123",Toast.LENGTH_LONG).show();
                 break;
+ 
             case R.id.filter:
                 Toast.makeText(getApplicationContext(),"abc",Toast.LENGTH_LONG).show();
                 break;
-            case R.id.add:
+             case R.id.add:
                 Toast.makeText(getApplicationContext(),"thêm thành công",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exit:
@@ -64,4 +69,12 @@ public class SanPhamActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+ 
+    @Override
+    public void addSP(SanPham sanPham) {
+       if(new DAOSanPham(). addSanPham( sanPham)){
+           Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+       }
+    }
+ 
 }
