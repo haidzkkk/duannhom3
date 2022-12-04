@@ -26,13 +26,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Activity.SanPhamActivity;
-import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho.SanPhamKhoAdapter;
 import laptrinhandroid.fpoly.dnnhm3.ConvertImg;
-import laptrinhandroid.fpoly.dnnhm3.DAO.DAOHoaDonNhap;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOLoaiSanPham;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
-import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonNhapKho;
 import laptrinhandroid.fpoly.dnnhm3.Entity.LoaiSP;
 import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.R;

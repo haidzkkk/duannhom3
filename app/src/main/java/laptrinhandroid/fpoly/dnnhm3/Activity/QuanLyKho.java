@@ -36,7 +36,7 @@ public class QuanLyKho extends AppCompatActivity {
         tabLayout_kho=findViewById(R.id.tablayout);
         viewPager_kho=findViewById(R.id.viewpager);
 
-     //   adapter=new ViewPagerAdapter(QuanLyKho.this,qlKho_fragment1);
+        adapter=new ViewPagerAdapter(QuanLyKho.this,qlKho_fragment1);
         viewPager_kho.setAdapter(adapter);
         toolbar_kho=findViewById(R.id.toolBar_kho);
         toolbar_kho.setTitleTextColor(Color.WHITE);
@@ -78,21 +78,21 @@ public class QuanLyKho extends AppCompatActivity {
 //        final android.widget.SearchView searchView = (android.widget.SearchView) MenuItemCompat.getActionView(searchViewItem);
         getMenuInflater().inflate(R.menu.item_kho, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_searchkho).getActionView();
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setMaxWidth(Integer.MAX_VALUE);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                qlKho_fragment1.InforSearch(s);
-//                return true;
-//            }
-//        });
+        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_searchkho).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                qlKho_fragment1.InforSearch(s);
+                return true;
+            }
+        });
         return true;
 
     }

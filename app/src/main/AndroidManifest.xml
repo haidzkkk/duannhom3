@@ -54,19 +54,28 @@
             android:value="" />
     </activity>
         <activity
+            android:name=".Activity.QuanLyKho"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".Activity.ChiTietHoaDonNhapActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".Activity.ChoseProducts"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".Activity.ListChamCongBangLuong"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Activity.QuanLyKho"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".Activity.ChiTietNhanVien"
             android:exported="false"

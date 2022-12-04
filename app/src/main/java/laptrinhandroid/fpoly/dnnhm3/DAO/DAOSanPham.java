@@ -102,6 +102,28 @@ public class DAOSanPham {
         return list;
     }
 
+    public List<SanPham> getlistSP(String sql, String...selectionArgs) throws SQLException {
+        List<SanPham> list = new ArrayList<>();
+        Statement statement = objConn.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            list.add(new SanPham(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9)));// Đọc dữ liệu từ ResultSet
+        }
+
+        return list;
+    }
+
+    public SanPham getIdSP(String id) {
+        String sql = "SELECT * FROM SanPham WHERE maSP="+id+"";
+        List<SanPham> listSP = null;
+        try {
+            listSP = getlistSP(sql,id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSP.get(0);
+    }
+
     public int getTongTienSanPham() throws SQLException {
  
         List <Integer> list = new ArrayList<>();

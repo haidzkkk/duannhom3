@@ -7,19 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterKho.SanPhamKhoAdapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
-import laptrinhandroid.fpoly.dnnhm3.Entity.BaoCao;
 import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
 import laptrinhandroid.fpoly.dnnhm3.R;
 
