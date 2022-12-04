@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
  
+ 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,9 +67,9 @@ public class FragmentDanhMuc extends Fragment {
             recyclerView.setAdapter(adapter);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+ 
           floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+             @Override
             public void onClick(View v) {
                 insert_danhmuc();
             }

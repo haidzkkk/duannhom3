@@ -1,25 +1,19 @@
 package laptrinhandroid.fpoly.dnnhm3.Adapter.Adapter_baocao;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAONhanVien;
-import laptrinhandroid.fpoly.dnnhm3.DAO.DAOhoadon;
 import laptrinhandroid.fpoly.dnnhm3.Entity.HoaDonBan;
 import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
 import laptrinhandroid.fpoly.dnnhm3.R;

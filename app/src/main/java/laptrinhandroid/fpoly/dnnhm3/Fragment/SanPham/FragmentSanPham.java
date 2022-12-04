@@ -1,47 +1,34 @@
 package laptrinhandroid.fpoly.dnnhm3.Fragment.SanPham;
 
- import android.app.Activity;
  import android.app.AlertDialog;
-import android.app.Dialog;
-import android.os.Bundle;
+ import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.Fragment;
  import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
- 
-import androidx.recyclerview.widget.RecyclerView;
 
  import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
+ import android.view.View;
 import android.view.ViewGroup;
  import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import laptrinhandroid.fpoly.dnnhm3.Activity.GiaoDienChinh;
-import laptrinhandroid.fpoly.dnnhm3.Activity.SanPhamActivity;
+ import laptrinhandroid.fpoly.dnnhm3.Activity.SanPhamActivity;
 import laptrinhandroid.fpoly.dnnhm3.Adapter.AdapterSanPham.SanPhamadapter;
 import laptrinhandroid.fpoly.dnnhm3.DAO.DAOLoaiSanPham;
-import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
-import laptrinhandroid.fpoly.dnnhm3.Entity.LoaiSP;
+ import laptrinhandroid.fpoly.dnnhm3.DAO.DAOSanPham;
+ import laptrinhandroid.fpoly.dnnhm3.Entity.LoaiSP;
 import laptrinhandroid.fpoly.dnnhm3.Entity.SanPham;
- import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
  import laptrinhandroid.fpoly.dnnhm3.R;
 
@@ -65,9 +52,10 @@ public class FragmentSanPham extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sanpham, container, false);
+ 
         daoLoaiSanPham = new DAOLoaiSanPham();
         daoSanPham = new DAOSanPham();
-        recyclerView = view.findViewById(R.id.rcv_sanpham);
+         recyclerView = view.findViewById(R.id.rcv_sanpham);
          floatingActionButton = view.findViewById(R.id.flbtn_sanpham);
         try {
             list = (ArrayList<SanPham>) daoSanPham.getListSanPham();
@@ -143,7 +131,7 @@ public class FragmentSanPham extends Fragment {
     public void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
-
+ 
     }
 
-}
+ }

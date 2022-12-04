@@ -2,7 +2,6 @@ package laptrinhandroid.fpoly.dnnhm3.Fragment.NhanVien;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import laptrinhandroid.fpoly.dnnhm3.Entity.NhanVien;
 import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorConfirmed;
 import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorNoConfirm;
 import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.DayViewDecoratorUnconfirmed;
-import laptrinhandroid.fpoly.dnnhm3.XuLiNgay.FormatDay;
 import laptrinhandroid.fpoly.dnnhm3.R;
 
 public class FragmentLich extends Fragment {
