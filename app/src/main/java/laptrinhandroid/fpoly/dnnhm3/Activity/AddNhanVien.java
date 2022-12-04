@@ -116,6 +116,7 @@ public class AddNhanVien extends AppCompatActivity implements setImg {
         txtSelectCCCD.setOnClickListener(view -> {
             show();
             i = 2;
+            //a
         });
         txtSelectTATS.setOnClickListener(view -> {
             show();
