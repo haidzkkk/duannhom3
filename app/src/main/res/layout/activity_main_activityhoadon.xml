@@ -8,18 +8,22 @@
    >
   <androidx.appcompat.widget.Toolbar
       android:layout_width="match_parent"
-      android:layout_height="60dp"
+      android:layout_height="wrap_content"
       app:menu="@menu/item"
-      android:background="#8ED87C"
-      android:clipToPadding="false"
       android:id="@+id/toobar1">
   </androidx.appcompat.widget.Toolbar>
 
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/edttimkiem"
+    android:background="@drawable/a"
+    android:visibility="gone"/>
   <com.google.android.material.tabs.TabLayout
       android:id="@+id/tablayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/white" />
+      android:background="@color/teal_700" />
   <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/viewpager2"
       android:layout_width="match_parent"

@@ -44,16 +44,18 @@ public class TabListBill_QLKho_Fragment extends Fragment implements InforSearch 
         View view = inflater.inflate(R.layout.fragment_tab_list_bill__q_l_kho_, container, false);
         return view;
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
     }
+
     @Override
-    public void onViewCreated(@NonNull  View view, @Nullable  Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         inflater = getLayoutInflater();
-        floatingActionButton=view.findViewById(R.id.floatbtn_addbill);
-        rcyPm= view.findViewById(R.id.recyclerview_lsBill);
+        floatingActionButton = view.findViewById(R.id.floatbtn_addbill);
+        rcyPm = view.findViewById(R.id.recyclerview_lsBill);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         rcyPm.setLayoutManager(layoutManager);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +72,7 @@ public class TabListBill_QLKho_Fragment extends Fragment implements InforSearch 
             arrHDN = (ArrayList<HoaDonNhapKho>) daoHoaDonNhap.getListHoaDonNhap();
         } catch (SQLException e) {
             e.printStackTrace();
-            Log.d("loiii", "onViewCreated: "+e.getMessage());
+            Log.d("loiii", "onViewCreated: " + e.getMessage());
         }
         adapter = new HoaDonNhapAdapter((QuanLyKho) mContext, arrHDN);
         rcyPm.setAdapter(adapter);
@@ -88,11 +90,13 @@ public class TabListBill_QLKho_Fragment extends Fragment implements InforSearch 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void InforSearch(String s) {
-        adapter.getFilter().filter(s);
+        if (adapter != null) {
+            adapter.getFilter().filter(s);
+        }
     }
 }

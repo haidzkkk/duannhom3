@@ -39,8 +39,12 @@ public class SanPhamThanhToanAdapter extends RecyclerView.Adapter<SanPhamThanhTo
     public void onBindViewHolder(@NonNull SanPhamThanhToanViewHolder holder, int position) {
         SanPham sanPham = arrSP.get(position);
         if(sanPham != null) {
-            holder.img_SPChon.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()+""));
-            holder.tv_tenSPChon.setText(sanPham.getTenSP()+"");
+try{
+    holder.img_SPChon.setImageBitmap(ConvertImg.convertBaseStringToBitmap(sanPham.getAnh()+""));
+}catch (Exception e){
+
+}    holder.tv_tenSPChon.setText(sanPham.getTenSP()+"");
+
             holder.tv_soluongtonChon.setText(String.format("%.0f", sanPham.getGiaNhap())+" x "+sanPham.getSoLuong());
             holder.tv_maSPChon.setText("SP"+sanPham.getMaSP());
             holder.tv_thanhtien.setText(String.format("%.0f", sanPham.getGiaNhap()*sanPham.getSoLuong())+ " đ");;

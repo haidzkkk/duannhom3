@@ -118,7 +118,7 @@ public class DAOBangLuong {
 
     public HashMap<Integer, Integer> getTongSoGioLamNhanVien() throws SQLException {
         CalendarDay calendarDay=CalendarDay.today();
-        String s = " select maNV,sum(DATEDIFF(hour, gioBatDau,gioKetThuc))  from ChamCong where xacNhanChamCong=1  and MONTH(ngay)=12 group by maNV order by sum(DATEDIFF(hour, gioBatDau,gioKetThuc)) DESC";
+        String s = " select maNV,sum(DATEDIFF(hour, gioBatDau,gioKetThuc))  from ChamCong where xacNhanChamCong=1  and MONTH(ngay)='"+calendarDay.getMonth()+"' group by maNV order by sum(DATEDIFF(hour, gioBatDau,gioKetThuc)) DESC";
         HashMap<Integer, Integer> list;
         if (objConn != null) {
             list = new HashMap<>();
